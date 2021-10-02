@@ -2,6 +2,7 @@ function comprobardatos() {
     let name = document.getElementById("controlName").value;
     let surname = document.getElementById("controlSurname").value;
     let id = document.getElementById("controlDNI").value;
+    let tel = document.getElementById("controlTel").value;
     let fecha = document.getElementById("controlFecha").value;
     let email = document.getElementById("controlEmail").value;
     let contra = document.getElementById("controlPass").value;
@@ -26,7 +27,30 @@ function comprobardatos() {
         document.getElementById("c2").appendChild(er)
     }
     if (!esCorrecto(id)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("El DNI no es correcto")
+        er.setAttribute('id', 'erDNI')
+        er.appendChild(t)
+        document.getElementById("c3").appendChild(er)
+    }
 
+    if (!esFecha(fecha)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Fecha incorrecta")
+        er.setAttribute('id', 'eFecha')
+        er.appendChild(t)
+        document.getElementById("c5").appendChild(er)
+    }
+
+    if (!esTel(tel)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Número incorrecto")
+        er.setAttribute('id', 'eTel')
+        er.appendChild(t)
+        document.getElementById("c4").appendChild(er)
     }
     
 }
@@ -54,12 +78,33 @@ function contieneNumeros(pal) {
 
 function esCorrecto (id) {
     var b = true;
-    var eq = ['T','R','W','A','G','M','Y','F','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E']
-    if (id.length != 9) b = false;
-    else {
-        let nums = id.substring(0,7)
-        
-    }
-    
+    var eq = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E']
+    if (id != "") {
+        if (id.length != 9) b = false;
+        else {
+            let nums = parseInt(id.substring(0,8))
+            if (eq[nums % 23] != id.charAt(8)) b = false
+        }
+    }    
+    return b
 
+}
+
+function esFecha(f) {
+    let fech = Date.now()
+    let act = new Date(fech)
+    let fAct = act.toISOString().substring(0,10)
+    if (Date.parse(f) >= Date.parse(fAct)) return false
+    else return true
+}
+
+function esTel(t) {
+    var b = true
+    if (t.length != 9) b = false;
+    var i = 0
+    while (i < t.length && b) {
+        if(isNaN(parseInt(t.charAt(i)))) b = false 
+        i++
+    }
+    return b
 }
