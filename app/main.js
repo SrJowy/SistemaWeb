@@ -6,7 +6,7 @@ function comprobardatos() {
     let fecha = document.getElementById("controlFecha").value;
     let email = document.getElementById("controlEmail").value;
     let contra = document.getElementById("controlPass").value;
-    
+    let e = false;
 
     eliminarHijos();
     
@@ -17,6 +17,7 @@ function comprobardatos() {
         er.setAttribute('id', 'erNombre')
         er.appendChild(t)
         document.getElementById("c1").appendChild(er)
+        e= true
     }
     if (contieneNumeros(surname)) {
         var er = document.createElement("p")
@@ -25,6 +26,7 @@ function comprobardatos() {
         er.setAttribute('id', 'erApellido')
         er.appendChild(t)
         document.getElementById("c2").appendChild(er)
+        e= true
     }
     if (!esCorrecto(id)) {
         var er = document.createElement("p")
@@ -33,6 +35,7 @@ function comprobardatos() {
         er.setAttribute('id', 'erDNI')
         er.appendChild(t)
         document.getElementById("c3").appendChild(er)
+        e= true
     }
 
     if (!esFecha(fecha)) {
@@ -42,6 +45,7 @@ function comprobardatos() {
         er.setAttribute('id', 'eFecha')
         er.appendChild(t)
         document.getElementById("c5").appendChild(er)
+        e= true
     }
 
     if (!esTel(tel)) {
@@ -51,7 +55,10 @@ function comprobardatos() {
         er.setAttribute('id', 'eTel')
         er.appendChild(t)
         document.getElementById("c4").appendChild(er)
+        e= true
     }
+
+    if (!e) document.reg.submit() //Falta por comprobar que se haya inbtroducido todo
     
 }
 
