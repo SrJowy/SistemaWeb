@@ -25,6 +25,9 @@ function comprobardatos() {
         er.appendChild(t)
         document.getElementById("c2").appendChild(er)
     }
+    if (!esCorrecto(id)) {
+
+    }
     
 }
 
@@ -47,4 +50,16 @@ function contieneNumeros(pal) {
         i++;
     }
     return b
+}
+
+function esCorrecto (id) {
+    var b = true;
+    var eq = ['T','R','W','A','G','M','Y','F','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E']
+    if (id.length != 9) b = false;
+    else {
+        let nums = id.substring(0,7)
+        
+    }
+    
+
 }
