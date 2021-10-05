@@ -15,34 +15,34 @@
         <h1>Registro</h1>
     </div>
         <div id="princ" class = "contenedorRegistro margenRegistro p-5 bordeRegistro rounded-3">
-            <form name="reg">
+            <form name="reg" action="registro_server.php" method="POST">
                 <div id="c1" class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="controlName">
+                    <input name = "nombre" type="text" class="form-control" id="controlName">
                 </div>
                 <div id = "c2" class="mb-3">
                     <label for="surnames" class="form-label">Apellidos</label>
-                    <input type="text" class="form-control" id="controlSurname">
+                    <input name= "apellidos" type="text" class="form-control" id="controlSurname">
                 </div>
                 <div id = "c3" class="mb-3">
                     <label for="id" class="form-label">DNI</label>
-                    <input type="text" class="form-control" id="controlDNI">
+                    <input name = "dni" type="text" class="form-control" id="controlDNI">
                 </div>
                 <div id = "c4" class="mb-3">
                     <label for="tel" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="controlTel">
+                    <input name = "tel" type="tel" class="form-control" id="controlTel">
                 </div>
                 <div id = "c5" class="mb-3">
                     <label for="date" class="form-label">Fecha de nacimiento</label>
-                    <input type="date" class="form-control" id="controlFecha">
+                    <input name = "fecha" type="date" class="form-control" id="controlFecha">
                 </div>
                 <div id = "c6" class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="controlEmail">
+                    <input name = "email" type="email" class="form-control" id="controlEmail">
                 </div>
                 <div id = "c7" class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="controlPass">
+                    <input name = "contra" type="password" class="form-control" id="controlPass">
                 </div>
                 <button type="button" class= "btn btn-primary" onclick="comprobardatos()"> Enviar</button>
             </form>
