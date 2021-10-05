@@ -9,31 +9,28 @@ $fecha = "";
 $email = "";
 $contra = "";
 
-$db = msqli_connect('localhost', 'root', 'f34HJ5L8.', 'webserver');
-
-if (isset($_POST['reg'])) {
-    $nombre = mysql_real_escape_string($db, $_GET['nombre']);
-    $apellidos = mysql_real_escape_string($db, $_GET['apellidos']);
-    $dni = mysql_real_escape_string($db, $_GET['dni']);
-    $tel = mysql_real_escape_string($db, $_GET['tel']);
-    $fecha = mysql_real_escape_string($db, $_GET['fecha']);
-    $email = mysql_real_escape_string($db, $_GET['email']);
-    $contra = mysql_real_escape_string($db, $_GET['contra']);
+$db = mysqli_connect('localhost', 'root', 'f34HJ5L8.', 'webapp');
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$dni = $_POST['dni'];
+$tel = $_POST['tel'];
+$fecha = $_POST['fecha'];
+$email = $_POST['email'];
+$contra = $_POST['contra'];
 
 
-    $user_check_query = "SELECT * FROM usuario WHERE dni = '$dni';";
-    $res = mysqli_query($db, $user_check_query);
-    $usuario = mysqli_fetch_assoc($res);
+$user_check_query = "SELECT * FROM usuario WHERE dni = '$dni';";
+$res = mysqli_query($db, $user_check_query);
+$usuario = mysqli_fetch_assoc($res);
 
     /*if ($dni) {
         if ($usuario['dni'] === $dni) {} //Completar más tarde
     }*/
 
-    $contra_c = md5($contra);
+//$contra_c = md5($contra);
 
-    $query = "INSERT INTO usuario (nombre, apellidos, dni, telefono, fecha_nac, email, contra)
-            VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra');";
-    mysqli_query($db, $query);
-    header('location: index.html');
+$query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra');";    
+$res = mysqli_query($db, $query);
+header('location: index.html');
 
-}
+?>
