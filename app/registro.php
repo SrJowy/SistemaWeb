@@ -41,6 +41,10 @@
                     <input name = "email" type="email" class="form-control" id="controlEmail">
                 </div>
                 <div id = "c7" class="mb-3">
+                    <label for="usern" class="form-label">Nombre de usuario</label>
+                    <input name= "username" type="text" class="form-control" id="controlUsername">
+                </div>
+                <div id = "c8" class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
                     <input name = "contra" type="password" class="form-control" id="controlPass">
                 </div>

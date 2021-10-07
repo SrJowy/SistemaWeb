@@ -74,26 +74,36 @@ function eliminarHijos() {
 }
 
 function contieneNumeros(pal) {
-    var b = false;
-    var i = 0;
-    while (i < pal.length && !b) {
-        if (!isNaN(pal[i])) b = true
-        i++;
+    if (pal.length == 0) {
+        return true;
+    } else {
+        var b = false;
+        var i = 0;
+        while (i < pal.length && !b) {
+            if (!isNaN(pal[i]) && pal[i] != ' ') b = true
+            i++;
+        }
+        return b
     }
-    return b
+    
 }
 
 function esCorrecto (id) {
-    var b = true;
-    var eq = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E']
-    if (id != "") {
-        if (id.length != 9) b = false;
-        else {
-            let nums = parseInt(id.substring(0,8))
-            if (eq[nums % 23] != id.charAt(8)) b = false
-        }
-    }    
-    return b
+    if (id.length == 0) {
+        return false;
+    } else {
+        var b = true;
+        var eq = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E']
+        if (id != "") {
+            if (id.length != 9) b = false;
+            else {
+                let nums = parseInt(id.substring(0,8))
+                if (eq[nums % 23] != id.charAt(8)) b = false
+            }
+        }    
+        return b
+    }
+    
 
 }
 

@@ -7,6 +7,7 @@ $dni = "";
 $tel = "0";
 $fecha = "";
 $email = "";
+$nombreUsuario="";
 $contra = "";
 
 $db = mysqli_connect('localhost', 'root', 'f34HJ5L8.', 'webapp');
@@ -16,6 +17,7 @@ $dni = $_POST['dni'];
 $tel = $_POST['tel'];
 $fecha = $_POST['fecha'];
 $email = $_POST['email'];
+$nombreUsuario = $_POST['username'];
 $contra = $_POST['contra'];
 
 
@@ -29,7 +31,7 @@ $usuario = mysqli_fetch_assoc($res);
 
 //$contra_c = md5($contra);
 
-$query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra');";    
+$query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
 $res = mysqli_query($db, $query);
 header('location: index.html');
 

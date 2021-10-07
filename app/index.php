@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +36,26 @@
                             <a class="nav-link" href="#">Base de datos</a>
                         </li>
                     </ul>
+                    <?php if (!isset($_SESSION['username'])) : ?>
                         <button onclick="location.href='inicioSesion.html'" type="button" class="btn btn-outline-dark me-2">Iniciar sesión</button>
-                        <button onclick="location.href='registro.html'" type="button" class="btn btn-dark">Crear cuenta</button>
-                </div>
+                        <button onclick="location.href='registro.php'" type="button" class="btn btn-dark">Crear cuenta</button>
+                    <?php endif ?>
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <div class= "dropdown text-end">
+                            <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="img/userphoto.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                            </a>
+                            <ul class ="dropdown-menu text-small" aria-labelledby="dropUser" style>
+                                <li>
+                                    <a class="dropdown-item" href="#">Panel Usuario</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="cerrar.php">Cerrar Sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php endif ?>
+                    </div>
             </div>
         </nav>
     </div>
