@@ -58,8 +58,18 @@ function comprobardatos() {
         e= true
     }
 
-    if (!e) document.reg.submit() //Falta por comprobar que se haya inbtroducido todo
-    
+    if (!esCorreo(email)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Correo incorrecto")
+        er.setAttribute('id', 'eCor')
+        er.appendChild(t)
+        document.getElementById("c6").appendChild(er)
+        e= true
+    }
+
+    if (!e) return true
+    else return false
 }
 
 function eliminarHijos() {
@@ -108,11 +118,15 @@ function esCorrecto (id) {
 }
 
 function esFecha(f) {
-    let fech = Date.now()
-    let act = new Date(fech)
-    let fAct = act.toISOString().substring(0,10)
-    if (Date.parse(f) >= Date.parse(fAct)) return false
-    else return true
+    if (f.length == 0) {
+        return false
+    } else {
+        let fech = Date.now()
+        let act = new Date(fech)
+        let fAct = act.toISOString().substring(0,10)
+        if (Date.parse(f) >= Date.parse(fAct)) return false
+        else return true
+    }
 }
 
 function esTel(t) {
@@ -124,4 +138,33 @@ function esTel(t) {
         i++
     }
     return b
+}
+
+function esCorreo(em) {
+    if (em.length == 0) {
+        return false
+    } else {
+        if (em.includes('@') && em.includes('.')) {
+            exten = em.split('.')
+            lExt = ["com", "org", "net", "de", "ru", "uk", "es"]
+            if (lExt.includes(exten[1])) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+        
+    }
+}
+
+function errorDatos() {
+    window.location("registro.php")
+    var er = document.createElement("p")
+    er.setAttribute('class', 'text-danger')
+    var t = document.createTextNode("Ese nombre de usuario ya existe")
+    er.setAttribute('id', 'eNombUs')
+    er.appendChild(t)
+    document.getElementById("c7").appendChild(er)
 }

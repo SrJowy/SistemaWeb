@@ -1,5 +1,7 @@
+<script src='main.js'></script>
 <?php
 session_start();
+unset($_SESSION['errorUsername']);
 
 $nombre = "";
 $apellidos = "";
@@ -19,20 +21,29 @@ $fecha = $_POST['fecha'];
 $email = $_POST['email'];
 $nombreUsuario = $_POST['username'];
 $contra = $_POST['contra'];
+$error = false;
 
 
-$user_check_query = "SELECT * FROM usuario WHERE dni = '$dni';";
+$user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$nombreUsuario';";
 $res = mysqli_query($db, $user_check_query);
 $usuario = mysqli_fetch_assoc($res);
 
-    /*if ($dni) {
-        if ($usuario['dni'] === $dni) {} //Completar más tarde
-    }*/
+if ($usuario) {
+    $error = true;
+}
 
-//$contra_c = md5($contra);
+if (!$error){
+    $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
+    $res = mysqli_query($db, $query);
+    header('location: index.php');
+} else {
+    //echo '<script type="text/javascript"> errorDatos(); </script>';
+    $_SESSION['errorUsername'] = $nombreUsuario;
+    header('location: registro.php');
+}
 
-$query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
-$res = mysqli_query($db, $query);
-header('location: index.html');
 
 ?>
+
+
+

@@ -16,6 +16,7 @@
     </div>
         <div id="princ" class = "contenedorRegistro margenRegistro p-5 bordeRegistro rounded-3">
             <form name="reg" action="registro_server.php" method="POST">
+                <?php include('errores.php'); ?>
                 <div id="c1" class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
                     <input name = "nombre" type="text" class="form-control" id="controlName">
@@ -48,6 +49,9 @@
                     <label for="password" class="form-label">Contraseña</label>
                     <input name = "contra" type="password" class="form-control" id="controlPass">
                 </div>
+                <?php if (!isset($_SESSION['errorUsername'])) : ?>
+                    <p class="text-danger" id="errUsername">El nombre de usuario ya está elegido</p>
+                <?php endif; ?>
                 <button type="button" class= "btn btn-primary" onclick="comprobardatos()"> Enviar</button>
             </form>
         </div>

@@ -9,8 +9,14 @@ $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$nombre' AND c
 $res = mysqli_query($db, $user_check_query);
 $usuario = mysqli_fetch_assoc($res);
 
-$_SESSION['username'] = $nombre;
-$_SESSION['success'] = "Hola, $nombre";
-header('location: index.php');
+if ($usuario) {
+    $_SESSION['username'] = $nombre;
+    $_SESSION['success'] = "Hola, $nombre";
+    header('location: index.php');
+} else {
+    
+}
+
+
 
 ?>
