@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +26,18 @@
                     <label for="password" class="form-label">Contraseña</label>
                     <input name = "pass" type="password" class="form-control" id="controlPass">
                 </div>
+                <?php if (isset($_SESSION[errUserContra])) : ?>
+                    <p class="text-danger" id="errUsername">El correo o contraseña no son correctos</p>
+                <?php endif; ?>
                 <button type="submit" class= " btn btn-primary "> Enviar</button>
             </form>
         <p class="mt-4 mb-0">¿No estás registrado aún? <a href="registro.php">Únete</a></p>
         </div>
+        <div class="contenedorRegistro margenVolver">
+            <a class="textLinks" href="index.php"> < Volver a inicio</a>
+        </div>
 </body>
 </html>
+<?php
+unset($_SESSION[errUserContra]);
+?>

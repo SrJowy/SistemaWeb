@@ -1,7 +1,5 @@
-<script src='main.js'></script>
 <?php
 session_start();
-unset($_SESSION['errorUsername']);
 
 $nombre = "";
 $apellidos = "";
@@ -26,19 +24,23 @@ $error = false;
 
 $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$nombreUsuario';";
 $res = mysqli_query($db, $user_check_query);
-$usuario = mysqli_fetch_assoc($res);
+$usuarioNombre = mysqli_fetch_assoc($res);
 
-if ($usuario) {
+$user_check_query = "SELECT * FROM usuario WHERE email = '$email';";
+$res = mysqli_query($db, $user_check_query);
+$usuarioMail = mysqli_fetch_assoc($res);
+
+if ($usuarioMail || $usuarioNombre) {
     $error = true;
+    if ($usuarioMail) $_SESSION['errorMail'] = $email;
+    if ($usuarioNombre) $_SESSION['errorUsername'] = $nombreUsuario;
 }
 
 if (!$error){
     $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
     $res = mysqli_query($db, $query);
     header('location: index.php');
-} else {
-    //echo '<script type="text/javascript"> errorDatos(); </script>';
-    $_SESSION['errorUsername'] = $nombreUsuario;
+} else {    
     header('location: registro.php');
 }
 

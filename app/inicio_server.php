@@ -14,7 +14,8 @@ if ($usuario) {
     $_SESSION['success'] = "Hola, $nombre";
     header('location: index.php');
 } else {
-    
+    $_SESSION['errUserContra'] = true;
+    header('location: inicioSesion.php');
 }
 
 

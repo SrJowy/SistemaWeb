@@ -68,8 +68,7 @@ function comprobardatos() {
         e= true
     }
 
-    if (!e) return true
-    else return false
+    if (!e) document.reg.submit();
 }
 
 function eliminarHijos() {

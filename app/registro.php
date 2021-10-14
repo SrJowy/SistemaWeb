@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +19,6 @@
     </div>
         <div id="princ" class = "contenedorRegistro margenRegistro p-5 bordeRegistro rounded-3">
             <form name="reg" action="registro_server.php" method="POST">
-                <?php include('errores.php'); ?>
                 <div id="c1" class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
                     <input name = "nombre" type="text" class="form-control" id="controlName">
@@ -49,11 +51,21 @@
                     <label for="password" class="form-label">Contraseña</label>
                     <input name = "contra" type="password" class="form-control" id="controlPass">
                 </div>
-                <?php if (!isset($_SESSION['errorUsername'])) : ?>
+                <?php if (isset($_SESSION['errorUsername'])) : ?>
                     <p class="text-danger" id="errUsername">El nombre de usuario ya está elegido</p>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['errorMail'])) : ?>
+                    <p class="text-danger" id="errMail">El correo electrónico ya está registrado</p>
                 <?php endif; ?>
                 <button type="button" class= "btn btn-primary" onclick="comprobardatos()"> Enviar</button>
             </form>
         </div>
+        <div class="contenedorRegistro margenVolver">
+            <a class="textLinks" href="index.php"> < Volver a inicio</a>
+        </div>
 </body>
 </html>
+<?php
+unset($_SESSION['errorUsername']);
+unset($_SESSION['errorMail']);
+?>

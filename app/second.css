@@ -20,7 +20,7 @@
 
 .margenRegistro {
     margin-top: 1rem;
-    margin-bottom: 5rem;
+    margin-bottom: 0px;
 }
 
 .contenedorRegistro {
@@ -32,6 +32,16 @@
 
 .bordeRegistro {
     border: 2px solid #9b9b9b;
+}
+
+.margenVolver {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.textLinks {
+    color: #9b9b9b;
+    text-decoration: none;
 }
 
 @media (max-width: 1400px) {
