@@ -44,7 +44,7 @@ session_start();
                             </a>
                             <ul class ="dropdown-menu text-small" aria-labelledby="dropUser" style>
                                 <li>
-                                    <a class="dropdown-item" href="panelUsuario.php">Panel Usuario</a>
+                                    <a class="dropdown-item" href="panelUsuario/cambiarDatos.php">Panel Usuario</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="cerrar.php">Cerrar Sesión</a>
