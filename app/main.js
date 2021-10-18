@@ -71,6 +71,90 @@ function comprobardatos() {
     if (!e) document.reg.submit();
 }
 
+function eliminarHijo(id) {
+    var el = document.getElementById(id)
+    if (el.lastChild.nodeName == 'P') {
+        el.removeChild(el.lastChild)
+    }
+}
+
+function comprobarCorreo() {
+    eliminarHijo('correo')
+    let e = false;
+    let email = document.getElementById("actCorreo").value;
+    if (!esCorreo(email)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Correo incorrecto");
+        er.setAttribute('id', 'eCor')
+        er.appendChild(t)
+        document.getElementById('correo').appendChild(er)
+        e= true;
+    }
+
+    if (!e) document.actCorreo.submit()
+}
+
+function comprobarNumero() {
+    eliminarHijo('tlf')
+    let e = false;
+    let num = document.getElementById("actNum").value
+    if(!esTel(num)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Teléfono incorrecto");
+        er.setAttribute('id', 'eTlf')
+        er.appendChild(t)
+        document.getElementById('tlf').appendChild(er)
+        e= true;
+    }
+
+    if (!e) document.actNum.submit();
+}
+
+function comprobarNombreUsuario() {
+    eliminarHijo('nomUsuario')
+    let e = false;
+    let username = document.getElementById("actUsername").value
+    if(username.length > 9) { //Ponerlo en el registro
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Nombre de usuario no válido");
+        er.setAttribute('id', 'eNomUsuario')
+        er.appendChild(t)
+        document.getElementById('nomUsuario').appendChild(er)
+        e= true;
+    }
+
+    if (!e) document.actUsername.submit();
+}
+
+function comprobarContra() {
+    eliminarHijo('contraNueva')
+    let e = false
+    let contraNueva = document.getElementById("actContraNueva").value
+    let contraVieja = document.getElementById("actContraAct").value
+    if (contraNueva.length < 8) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("La contraseña no es válida");
+        er.setAttribute('id', 'eContraNueva')
+        er.appendChild(t)
+        document.getElementById("contraNueva").appendChild(er)
+        e = true
+    } else if (contraVieja == contraNueva) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Las contraseñas no pueden ser iguales");
+        er.setAttribute('id', 'eContraNueva')
+        er.appendChild(t)
+        document.getElementById("contraNueva").appendChild(er)
+        e = true
+    }
+
+    if (!e) document.actContraNueva.submit();
+}
+
 function eliminarHijos() {
     for (var i =1; i< 8; i++) {
         var c = "c" + i

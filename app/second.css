@@ -44,6 +44,24 @@
     text-decoration: none;
 }
 
+.botonAjustes {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    height: 95px;
+    border-right: 1px ridge #495057;
+}
+
+.bbtm {
+    border-bottom: 1px ridge #495057
+}
+
 @media (max-width: 1400px) {
     .px-md-6 {
         padding-right: 3rem;

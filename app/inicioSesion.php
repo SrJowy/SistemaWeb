@@ -26,7 +26,7 @@ session_start();
                     <label for="password" class="form-label">Contraseña</label>
                     <input name = "pass" type="password" class="form-control" id="controlPass">
                 </div>
-                <?php if (isset($_SESSION[errUserContra])) : ?>
+                <?php if (isset($_SESSION['errUserContra'])) : ?>
                     <p class="text-danger" id="errUsername">El correo o contraseña no son correctos</p>
                 <?php endif; ?>
                 <button type="submit" class= " btn btn-primary "> Enviar</button>
@@ -39,5 +39,5 @@ session_start();
 </body>
 </html>
 <?php
-unset($_SESSION[errUserContra]);
+unset($_SESSION['errUserContra']);
 ?>

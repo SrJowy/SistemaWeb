@@ -1,15 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-
-}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>TBA</title>
+    <title>Call of Stats</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='second.css'>
@@ -19,7 +16,7 @@ if (!isset($_SESSION['username'])) {
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Viva España</a>
+                <a class="navbar-brand" href="#">Call of Stats</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navi" aria-control="navi" 
                 aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -37,17 +34,17 @@ if (!isset($_SESSION['username'])) {
                         </li>
                     </ul>
                     <?php if (!isset($_SESSION['username'])) : ?>
-                        <button onclick="location.href='inicioSesion.html'" type="button" class="btn btn-outline-dark me-2">Iniciar sesión</button>
+                        <button onclick="location.href='inicioSesion.php'" type="button" class="btn btn-outline-dark me-2">Iniciar sesión</button>
                         <button onclick="location.href='registro.php'" type="button" class="btn btn-dark">Crear cuenta</button>
                     <?php endif ?>
                     <?php if (isset($_SESSION['username'])) : ?>
-                        <div class= "dropdown text-end">
+                        <div class= "dropdown me-5">
                             <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="img/userphoto.png" alt="mdo" width="32" height="32" class="rounded-circle">
                             </a>
                             <ul class ="dropdown-menu text-small" aria-labelledby="dropUser" style>
                                 <li>
-                                    <a class="dropdown-item" href="#">Panel Usuario</a>
+                                    <a class="dropdown-item" href="panelUsuario.php">Panel Usuario</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="cerrar.php">Cerrar Sesión</a>
@@ -65,9 +62,11 @@ if (!isset($_SESSION['username'])) {
             <div class="p-4 p-md-5 text-white rounded bg-dark">
                 <div class = "row">
                     <div class="col-12 col-md-6">
-                        <h1 class="display-4">Buenas tardes y viva España</h1>
-                        <p class="lead">Únete a la mayor web de amantes de nuestra amada nación ESPAÑA</p>
-                        <button type="button" class="btn btn-secondary">Crear cuenta</button>
+                        <h3 class="display-4">Juega, compite y ¡GANA!</h3>
+                        <p class="lead">Únete a la mayor web de competición para Call of Duty: Cold War y juega contra otros jugadores 
+                            para ganar premios y experiencias únicas.
+                        </p>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='registro.php'">Crear cuenta</button>
                     </div>
                     <div class ="col-12 col-lg-6 mt-3 mt-lg-0">
                             <h3 class="text-center">Top 3 de la semana</h3>
@@ -75,10 +74,10 @@ if (!isset($_SESSION['username'])) {
                                 <div class="p-4 rounded bg-white text-dark text-end">
                                     <div class = "row">
                                         <div class="col-4">
-                                            <!---<img src="img/juancarsecae.png" class="imgRedonda">--->
+                                            <img src="img/av1.png" class="imgRedonda">
                                         </div>
                                         <div class="col-8">
-                                            <p class="my-4">#1 - PacoPiernasCortas</p>
+                                            <p class="my-4">#1 - HHHHHHHHHH</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,10 +86,10 @@ if (!isset($_SESSION['username'])) {
                                 <div class="p-4 rounded bg-white text-dark text-end">
                                     <div class = "row">
                                         <div class="col-4">
-                                            <img src="img/juancarsecae.png" class="imgRedonda">
+                                            <img src="img/av2.png" class="imgRedonda">
                                         </div>
                                         <div class="col-8">
-                                            <p class="my-4">#2 - Juancar</p>
+                                            <p class="my-4">#2 - HHHHHH</p>
                                         </div>
                                     </div>
                                 </div>
@@ -99,10 +98,10 @@ if (!isset($_SESSION['username'])) {
                                 <div class="p-4 rounded bg-white text-dark text-end">
                                     <div class = "row">
                                         <div class="col-4">
-                                            <!---<img src="img/juancarsecae.png" class="imgRedonda">--->
+                                            <img src="img/av3.png" class="imgRedonda">
                                         </div>
                                         <div class="col-8">
-                                            <p class="my-4">#3 - RiveraCousin</p>
+                                            <p class="my-4">#3 - HHHHHH</p>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +137,7 @@ if (!isset($_SESSION['username'])) {
         </div>
     </main>
     <footer class="modal-footer">
-        <p>Sígueme y te sigo papi</p>
+        <p>Sígueme en los internetes</p>
         <p>
           <a href="#">Arriba</a>
         </p>
