@@ -26,7 +26,7 @@ function actualizarCorreo() {
         mysqli_query($db, $query);
         $_SESSION['successActMail'] = true;
     }
-    header('location: panelUsuario.php');
+    header('location: cambiarDatos.php');
 
 }
 
@@ -38,7 +38,7 @@ function actualizarTel() {
     $query = "UPDATE usuario SET telefono = '$tel' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActNum'] = true;
-    header('location: panelUsuario.php');
+    header('location: cambiarDatos.php');
 }
 
 function actualizarNombreUsuario() {
@@ -58,7 +58,7 @@ function actualizarNombreUsuario() {
         $_SESSION['successActUser'] = true;
         $_SESSION['username'] = $NnombreUsuario;
     }
-    header('location: panelUsuario.php');
+    header('location: cambiarDatos.php');
 }
 
 function actualizarContra() {
@@ -70,7 +70,7 @@ function actualizarContra() {
     $query = "UPDATE usuario SET contra = '$contraN' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActContra'] = true;
-    header('location: panelUsuario.php');
+    header('location: cambiarDatos.php');
     
 }
 ?>

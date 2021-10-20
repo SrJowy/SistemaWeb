@@ -17,10 +17,10 @@ if (!isset($_SESSION['username'])) {
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Call of Stats</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='second.css'>
-    <script src='bootstrap.bundle.js'></script>
-    <script src='main.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../second.css'>
+    <script src='../bootstrap.bundle.js'></script>
+    <script src='../main.js'></script>
 </head>
 <body>
     <div class="container">
@@ -34,7 +34,7 @@ if (!isset($_SESSION['username'])) {
                 <div class="collapse navbar-collapse" id="navi">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Inicio</a>
+                            <a class="nav-link" href="../index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Novedades</a>
@@ -44,20 +44,20 @@ if (!isset($_SESSION['username'])) {
                         </li>
                     </ul>
                     <?php if (!isset($_SESSION['username'])) : ?>
-                        <button onclick="location.href='inicioSesion.php'" type="button" class="btn btn-outline-dark me-2">Iniciar sesión</button>
-                        <button onclick="location.href='registro.php'" type="button" class="btn btn-dark">Crear cuenta</button>
+                        <button onclick="location.href='../inicioSesion.php'" type="button" class="btn btn-outline-dark me-2">Iniciar sesión</button>
+                        <button onclick="location.href='../registro.php'" type="button" class="btn btn-dark">Crear cuenta</button>
                     <?php endif ?>
                     <?php if (isset($_SESSION['username'])) : ?>
                         <div class= "dropdown me-5">
                             <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="img/userphoto.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                                <img src="../img/userphoto.png" alt="mdo" width="32" height="32" class="rounded-circle">
                             </a>
                             <ul class ="dropdown-menu text-small" aria-labelledby="dropUser" style>
                                 <li>
                                     <a class="dropdown-item" href="#">Panel Usuario</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="cerrar.php">Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="../cerrar.php">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </div>
@@ -74,26 +74,24 @@ if (!isset($_SESSION['username'])) {
                     <h3>Panel del usuario</h3>
                 </div>
             </div>
-                <div class="p-4 text-white rounded bg-dark">
-                    <div class = "row">
-                        <div class="col-4">
-                            <div class="row">
-                            <button type="button" class="botonAjustes bbtm">Actualizar datos  ></button>
-                            </div>
-                            <div class="row">
-                            <button type="button" class="botonAjustes bbtm">Partidas guardadas  ></button>
-                            </div>
-                            <div class="row">
-                            <button type="button" class="botonAjustes bbtm">Añadir partidas  ></button>
-                            </div>
-                            <div class="row">
-                            <button type="button" class="botonAjustes bbtm">Puntos  ></button>
-                            </div>
-                            <div class="row">
-                            <button type="button" class="botonAjustes">Actualizar datos  ></button>
-                            </div>
-                        </div>
-                        <div class ="col-12 col-lg-8 mt-3 mt-lg-0">
+            <div class= "row">
+            <div class="col-3 ps-4">
+                <div class="row">
+                    <button type="button" class="botonAjustes seleccionado" onclick="location.href='#'">Actualizar datos  ></button>
+                </div>
+                <div class="row">
+                    <button type="button" class="botonAjustes" onclick="location.href='partidasGuardadas.php'">Partidas guardadas  ></button>
+                </div>
+                <div class="row">
+                    <button type="button" class="botonAjustes">Añadir partidas  ></button>
+                </div>
+                <div class="row">
+                    <button type="button" class="botonAjustes">Puntos  ></button>
+                </div>
+            </div>
+            <div class = "col-9">
+                <div class="text-white rounded bg-dark">
+                        <div class ="col-12 mt-3 mt-lg-0 p-4">
                             <div class = "row mb-4">
                                 <div class="col-lg-4 text-end">
                                     <p>Nombre: </p>
@@ -247,12 +245,14 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                 </div>
+            </div>
+                </div>
                     <div class="my-3 my-md-3 bg-white"></div>
                     <div class="p-4 p-md-5 bg-white">
                             <div class="row">
                                 <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
                                     <div class="container bg-dark rounded p-0">
-                                        <img class="imgCuadrada" src="img/juancarsecae.png">
+                                        <img class="imgCuadrada" src="../img/juancarsecae.png">
                                         <div class="container text-white p-2 text-center">
                                             <h1>Grandes oponentes</h1>
                                         </div>
