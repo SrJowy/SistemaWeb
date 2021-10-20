@@ -9,9 +9,12 @@ if (!isset($_SESSION['username'])) {
     $res = mysqli_query($db, $user_check_query);
     $usuario = mysqli_fetch_assoc($res);
 
-    //Obtener las partidas del usuario
-    $partidas_query = "SELECT * FROM partida WHERE nombreUsuario = '$user';";
-    $res = mysqli_query($db, $partidas_query);
+    //Obtener variables a modificar
+    $partida = $_POST['partida'];
+    $mapa = $_POST['mapa'];
+    $puntos = $_POST['puntos'];
+    $bajas = $_POST['bajas'];
+    $muertes = $_POST['muertes'];
 }
 ?>
 <!DOCTYPE html>
@@ -99,94 +102,56 @@ if (!isset($_SESSION['username'])) {
             </div>
             <div class ="col-9">
                 <div class="text-white rounded bg-dark">
-                    <div class = "row p-5">
-                        <?php
-                            if (mysqli_num_rows($res) == 0):?>
-                                <div class= "row text-center">
-                                    <h3>No se han encontrado partidas</h3>
-                                </div>
-                            <?php
-                            else :
-                                while ($row = mysqli_fetch_array ($res)) :
-                                    $num_partida = $row['num_partida'];
-                                    $mapa = $row['mapa'];
-                                    $puntos = $row['puntos'];
-                                    $bajas = $row['bajas'];
-                                    $muertes = $row['muertes'];
-                                    $kda = number_format($bajas/$muertes, 2);
-                                ?>
-                            <div class ="col-12 bordePartidas mt-4">
-                            <div class = "row p-3 text-dark bg-light">
-                                <h3>Partida <?php echo $num_partida ?></h3>
-                            </div>
-                            <div class= row>
-                                <div class ="col-lg-5 p-4">
-                                    <div class = "row">
-                                        <?php if ($mapa == "Cartel") : ?>
-                                            <img class = "imgMapa" src="../img/m1.png">
-                                        <?php elseif ($mapa == "Nuketown") : ?>
-                                            <img class = "imgMapa" src="../img/m2.png">
-                                        <?php elseif ($mapa == "The Pines") : ?>
-                                            <img class = "imgMapa" src="../img/m3.png">
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class = "row text-center mt-3">
-                                        <h4>Mapa: <?php echo $mapa ?></h4>
-                                    </div>
-                                    <div class = "row mx-5 ms-5 my-3">
-                                        <form id="partida_<?php echo $num_partida?>" name="partida_<?php echo $num_partida?>" method="POST" action="eliminar_partida.php">
-                                            <input type = "hidden" name="partida" value="<?php echo $num_partida?>">
-                                            <button type="button" name="<?php echo $num_partida?>" id="<?php echo $num_partida?>" class ="btn btn-outline-danger ms-3" onclick="eliminarPartida(this)"><i class="fa fa-close me-3"></i>Eliminar partida</button>
-                                        </form>
-                                    </div>
-                                    <div class = "row mx-5 ms-5 my-3">
-                                        <form id="modificar" name="modificar" method="POST" action="modificar.php">
-                                            <input type = "hidden" name="partida" value="<?php echo $num_partida?>">
-                                            <input type = "hidden" name="mapa" value="<?php echo $mapa?>">
-                                            <input type = "hidden" name="puntos" value="<?php echo $puntos?>">
-                                            <input type = "hidden" name="bajas" value="<?php echo $bajas?>">
-                                            <input type = "hidden" name="muertes" value="<?php echo $muertes?>">
-                                            <button type="submit" name="<?php echo $num_partida?>" id="<?php echo $num_partida?>" class ="btn btn-outline-primary ms-4">Modificar partida</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class ="col-lg-3 p-4">
-                                    <div class = "row mb-3">
-                                        <h4>Puntos: <?php echo $puntos ?></h4>
-                                    </div>
-                                    <div class = "row mb-3">
-                                        <h4>Bajas: <?php echo $bajas ?></h4>
-                                    </div>
-                                    <div class = "row mb-3">
-                                        <h4>Muertes: <?php echo $muertes ?></h4>
-                                    </div>
-                                    <div class = "row mb-3">
-                                        <h4>K/D: <?php  echo $kda ?></h4>
-                                    </div>
-                                </div>
-                                <div class ="col-lg-4 p-4">
-                                    <div class = "row mb-3">
-                                        <h4>Ventajas equipadas:</h4>
-                                    </div>
-                                    <div class = "row centered text-center">
-                                        <img  class="ventaja mb-2" src="../img/v2.png">
-                                        <p>Avión espía</p>
-                                    </div>
-                                    <div class = "row centered text-center">
-                                        <img  class="ventaja mb-2" src="../img/v1.png">
-                                        <p>Napalm</p>
-                                    </div>
-                                    <div class = "row centered text-center">
-                                        <img  class="ventaja mb-2" src="../img/v3.png">
-                                        <p>Vtol</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endwhile;
-                            endif; ?>
-
+                    <div class = "row p-5 text-center pb-0">
+                        <h3>Edición de datos de la partida <?php echo $partida ?></h3>
                     </div>
+                    <div class = "row p-4 pb-0">
+                        <div class = "col-4 text-end p-2">
+                            <p class = "pb-0">ID de la partida:</p>
+                        </div>
+                        <div class = "col-6 px-5">
+                            <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" value=<?php echo $partida?>>
+                        </div>
+                    </div>
+                    <div class = "row p-4 pb-0">
+                        <div class = "col-4 text-end p-2">
+                            <p class = "pb-0">Mapa: </p>
+                        </div>
+                        <div class = "col-6 px-5">
+                            <input name = "actMapa" type="text" class="form-control" id="actMapa" value=<?php echo $mapa?>>
+                        </div>
+                    </div>
+                    <div class = "row p-4 pb-0">
+                        <div class = "col-4 text-end p-2">
+                            <p class = "pb-0">Puntos:</p>
+                        </div>
+                        <div class = "col-6 px-5">
+                            <input name = "actPuntos" type="text" class="form-control" id="actPuntos" value=<?php echo $puntos?>>
+                        </div>
+                    </div>
+                    <div class = "row p-4 pb-0">
+                        <div class = "col-4 text-end p-2">
+                            <p class = "pb-0">Bajas:</p>
+                        </div>
+                        <div class = "col-6 px-5">
+                            <input name = "actBajas" type="text" class="form-control" id="actBajas" value=<?php echo $bajas?>>
+                        </div>
+                    </div>
+                    <div class = "row p-4 pb-0">
+                        <div class = "col-4 text-end p-2">
+                            <p class = "pb-0">Muertes:</p>
+                        </div>
+                        <div class = "col-6 px-5">
+                            <input name = "actMuertes" type="text" class="form-control" id="actMuertes" value=<?php echo $muertes?>>
+                        </div>
+                    </div>
+                    <div class ="row p-4 mx-5 float-end">
+                        <div class = "col-4">
+                            <button type = "button" class = "btn btn-primary" onclick="">Actualizar</button>
+                        </div>
+                    </div>
+                    <div class ="row p-5 mx-5"></div>
+                    <div class ="row p-3 mx-5"></div>
                 </div>
             </div>
             </div>

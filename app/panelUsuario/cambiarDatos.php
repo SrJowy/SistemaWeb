@@ -244,7 +244,6 @@ if (!isset($_SESSION['username'])) {
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
                 </div>
                     <div class="my-3 my-md-3 bg-white"></div>
