@@ -29,6 +29,7 @@ if (!isset($_SESSION['username'])) {
     <script src='../bootstrap.bundle.js'></script>
     <script src='../main.js'></script>
     <script src='eliminar.js'></script>
+    <script src='comprobarDatos.js'></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
         rel="stylesheet"  type='text/css'> <!--- Iconos --->
 
@@ -91,10 +92,10 @@ if (!isset($_SESSION['username'])) {
                     <button type="button" class="botonAjustes" onclick="location.href='cambiarDatos.php'">Actualizar datos  ></button>
                 </div>
                 <div class="row">
-                    <button type="button" class="botonAjustes seleccionado" onclick="location.href='#'">Partidas guardadas  ></button>
+                    <button type="button" class="botonAjustes" onclick="location.href='partidasGuardadas.php'">Partidas guardadas  ></button>
                 </div>
                 <div class="row">
-                    <button type="button" class="botonAjustes">Añadir partidas  ></button>
+                    <button type="button" class="botonAjustes seleccionado" onclick="location.href='#'">Añadir partidas  ></button>
                 </div>
                 <div class="row">
                     <button type="button" class="botonAjustes">Puntos  ></button>
@@ -103,53 +104,60 @@ if (!isset($_SESSION['username'])) {
             <div class ="col-9">
                 <div class="text-white rounded bg-dark">
                     <div class = "row p-5 text-center pb-0">
-                        <h3>Edición de datos de la partida <?php echo $partida ?></h3>
+                        <?php if ($partida != null) : ?>
+                            <h3>Edición de datos de la partida <?php echo $partida ?></h3>
+                            <?php $_SESSION['partidaAct'] = $partida ?>
+                        <?php else : ?>
+                            <h3>Añadir una partida</h3>
+                        <?php endif; ?>
                     </div>
-                    <div class = "row p-4 pb-0">
-                        <div class = "col-4 text-end p-2">
-                            <p class = "pb-0">ID de la partida:</p>
+                    <form name="createUpdateData" action="createUpdateData.php" method="POST">
+                        <div class = "row p-4 pb-0">
+                            <div class = "col-4 text-end p-2">
+                                <p class = "pb-0">ID de la partida:</p>
+                            </div>
+                            <div class = "col-6 px-5">
+                                <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" value=<?php echo $partida?>>
+                            </div>
                         </div>
-                        <div class = "col-6 px-5">
-                            <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" value=<?php echo $partida?>>
+                        <div class = "row p-4 pb-0">
+                            <div class = "col-4 text-end p-2">
+                                <p class = "pb-0">Mapa: </p>
+                            </div>
+                            <div class = "col-6 px-5">
+                                <input name = "actMapa" type="text" class="form-control" id="actMapa" value=<?php echo $mapa?>>
+                            </div>
                         </div>
-                    </div>
-                    <div class = "row p-4 pb-0">
-                        <div class = "col-4 text-end p-2">
-                            <p class = "pb-0">Mapa: </p>
+                        <div class = "row p-4 pb-0">
+                            <div class = "col-4 text-end p-2">
+                                <p class = "pb-0">Puntos:</p>
+                            </div>
+                            <div class = "col-6 px-5">
+                                <input name = "actPuntos" type="text" class="form-control" id="actPuntos" value=<?php echo $puntos?>>
+                            </div>
                         </div>
-                        <div class = "col-6 px-5">
-                            <input name = "actMapa" type="text" class="form-control" id="actMapa" value=<?php echo $mapa?>>
+                        <div class = "row p-4 pb-0">
+                            <div class = "col-4 text-end p-2">
+                                <p class = "pb-0">Bajas:</p>
+                            </div>
+                            <div class = "col-6 px-5">
+                                <input name = "actBajas" type="text" class="form-control" id="actBajas" value=<?php echo $bajas?>>
+                            </div>
                         </div>
-                    </div>
-                    <div class = "row p-4 pb-0">
-                        <div class = "col-4 text-end p-2">
-                            <p class = "pb-0">Puntos:</p>
+                        <div class = "row p-4 pb-0">
+                            <div class = "col-4 text-end p-2">
+                                <p class = "pb-0">Muertes:</p>
+                            </div>
+                            <div class = "col-6 px-5">
+                                <input name = "actMuertes" type="text" class="form-control" id="actMuertes" value=<?php echo $muertes?>>
+                            </div>
                         </div>
-                        <div class = "col-6 px-5">
-                            <input name = "actPuntos" type="text" class="form-control" id="actPuntos" value=<?php echo $puntos?>>
+                        <div class ="row p-4 mx-5 float-end">
+                            <div class = "col-4">
+                                <button type = "button" class = "btn btn-primary" onclick="comprobarDatosIntroducidos()">Actualizar</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class = "row p-4 pb-0">
-                        <div class = "col-4 text-end p-2">
-                            <p class = "pb-0">Bajas:</p>
-                        </div>
-                        <div class = "col-6 px-5">
-                            <input name = "actBajas" type="text" class="form-control" id="actBajas" value=<?php echo $bajas?>>
-                        </div>
-                    </div>
-                    <div class = "row p-4 pb-0">
-                        <div class = "col-4 text-end p-2">
-                            <p class = "pb-0">Muertes:</p>
-                        </div>
-                        <div class = "col-6 px-5">
-                            <input name = "actMuertes" type="text" class="form-control" id="actMuertes" value=<?php echo $muertes?>>
-                        </div>
-                    </div>
-                    <div class ="row p-4 mx-5 float-end">
-                        <div class = "col-4">
-                            <button type = "button" class = "btn btn-primary" onclick="">Actualizar</button>
-                        </div>
-                    </div>
+                    </form>
                     <div class ="row p-5 mx-5"></div>
                     <div class ="row p-3 mx-5"></div>
                 </div>

@@ -83,7 +83,7 @@ if (!isset($_SESSION['username'])) {
                     <button type="button" class="botonAjustes" onclick="location.href='partidasGuardadas.php'">Partidas guardadas  ></button>
                 </div>
                 <div class="row">
-                    <button type="button" class="botonAjustes">Añadir partidas  ></button>
+                    <button type="button" class="botonAjustes" onclick="location.href='modificar.php'">Añadir partidas  ></button>
                 </div>
                 <div class="row">
                     <button type="button" class="botonAjustes">Puntos  ></button>

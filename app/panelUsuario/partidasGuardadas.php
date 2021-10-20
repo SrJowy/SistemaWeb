@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
                     <?php endif ?>
                     <?php if (isset($_SESSION['username'])) : ?>
                         <div class= "dropdown me-5">
-                            <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle me-5" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="../img/userphoto.png" alt="mdo" width="32" height="32" class="rounded-circle">
                             </a>
                             <ul class ="dropdown-menu text-small" aria-labelledby="dropUser" style>
@@ -91,7 +91,7 @@ if (!isset($_SESSION['username'])) {
                     <button type="button" class="botonAjustes seleccionado" onclick="location.href='#'">Partidas guardadas  ></button>
                 </div>
                 <div class="row">
-                    <button type="button" class="botonAjustes">Añadir partidas  ></button>
+                    <button type="button" class="botonAjustes" onclick="location.href='modificar.php'">Añadir partidas  ></button>
                 </div>
                 <div class="row">
                     <button type="button" class="botonAjustes">Puntos  ></button>
