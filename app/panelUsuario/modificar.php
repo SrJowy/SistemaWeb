@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header('location: index.php');
 } else {
-    $db = mysqli_connect('localhost', 'root', 'f34HJ5L8.', 'webapp');
+    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
     $user = $_SESSION['username'];
     $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$user';";
     $res = mysqli_query($db, $user_check_query);
@@ -15,6 +15,10 @@ if (!isset($_SESSION['username'])) {
     $puntos = $_POST['puntos'];
     $bajas = $_POST['bajas'];
     $muertes = $_POST['muertes'];
+
+    $query = "SELECT SUM(puntos) FROM partida WHERE nombreUsuario = '$user';";
+    $res2 = mysqli_query($db,$query);
+    $puntosMostrar = mysqli_fetch_assoc($res2);
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +26,7 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Call of Stats</title>
+    <title>Call of Data</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../second.css'>
@@ -38,7 +42,7 @@ if (!isset($_SESSION['username'])) {
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Call of Stats</a>
+                <a class="navbar-brand" href="#">Call of Data</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navi" aria-control="navi" 
                 aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -48,21 +52,22 @@ if (!isset($_SESSION['username'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="../index.php">Inicio</a>
                         </li>
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a class="nav-link" href="#">Novedades</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Base de datos</a>
-                        </li>
+                        </li>-->
                     </ul>
                     <?php if (!isset($_SESSION['username'])) : ?>
                         <button onclick="location.href='../inicioSesion.php'" type="button" class="btn btn-outline-dark me-2">Iniciar sesión</button>
                         <button onclick="location.href='../registro.php'" type="button" class="btn btn-dark">Crear cuenta</button>
                     <?php endif ?>
                     <?php if (isset($_SESSION['username'])) : ?>
+                        <p class = "p-3 pb-0"><?php echo $_SESSION['success']; ?></p>
                         <div class= "dropdown me-5">
-                            <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../img/userphoto.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                            <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle me-5" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="../img/av1.png" alt="mdo" width="32" height="32" class="rounded-circle">
                             </a>
                             <ul class ="dropdown-menu text-small" aria-labelledby="dropUser" style>
                                 <li>
@@ -98,7 +103,19 @@ if (!isset($_SESSION['username'])) {
                     <button type="button" class="botonAjustes seleccionado" onclick="location.href='#'">Añadir partidas  ></button>
                 </div>
                 <div class="row">
-                    <button type="button" class="botonAjustes">Puntos  ></button>
+                    <div class= "p-4 rounded bg-primary text-dark text-end">
+                        <div class= "row">
+                            <div class = "col-4">
+                                <img src="../img/av1.png" class="imgRedonda p-1">
+                            </div>
+                            <div class = "col-8 text-white">
+                                <h2><?php echo $user ?></h2>
+                            </div>
+                            <div class = "col-12 text-white text-end pt-3">
+                                <h4>Puntos totales: <?php echo $puntosMostrar['SUM(puntos)'] ?></h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class ="col-9">
@@ -117,15 +134,19 @@ if (!isset($_SESSION['username'])) {
                                 <p class = "pb-0">ID de la partida:</p>
                             </div>
                             <div class = "col-6 px-5">
-                                <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" value=<?php echo $partida?>>
+                                <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" placeholder="ej: FFFF0000" value=<?php echo $partida?>>
                             </div>
                         </div>
                         <div class = "row p-4 pb-0">
                             <div class = "col-4 text-end p-2">
                                 <p class = "pb-0">Mapa: </p>
                             </div>
-                            <div class = "col-6 px-5">
-                                <input name = "actMapa" type="text" class="form-control" id="actMapa" value=<?php echo $mapa?>>
+                            <div class = "col-6 px-5 p-2">
+                                <select id ="actMapa" name= "actMapa">
+                                    <option value="The Pines" <?php if ($mapa == "The Pines") : ?> selected <?php endif; ?>>The Pines</option>
+                                    <option value="Nuketown" <?php if ($mapa == "Nuketown") : ?> selected <?php endif; ?>>Nuketown</option>
+                                    <option value="Cartel" <?php if ($mapa == "Cartel") : ?> selected <?php endif; ?>>Cartel</option>
+                                </select>
                             </div>
                         </div>
                         <div class = "row p-4 pb-0">
@@ -133,7 +154,7 @@ if (!isset($_SESSION['username'])) {
                                 <p class = "pb-0">Puntos:</p>
                             </div>
                             <div class = "col-6 px-5">
-                                <input name = "actPuntos" type="text" class="form-control" id="actPuntos" value=<?php echo $puntos?>>
+                                <input name = "actPuntos" type="text" class="form-control" id="actPuntos" placeholder="ej: 24000" value=<?php echo $puntos?>>
                             </div>
                         </div>
                         <div class = "row p-4 pb-0">
@@ -141,7 +162,7 @@ if (!isset($_SESSION['username'])) {
                                 <p class = "pb-0">Bajas:</p>
                             </div>
                             <div class = "col-6 px-5">
-                                <input name = "actBajas" type="text" class="form-control" id="actBajas" value=<?php echo $bajas?>>
+                                <input name = "actBajas" type="text" class="form-control" id="actBajas" placeholder="ej: 15" value=<?php echo $bajas?>>
                             </div>
                         </div>
                         <div class = "row p-4 pb-0">
@@ -149,12 +170,16 @@ if (!isset($_SESSION['username'])) {
                                 <p class = "pb-0">Muertes:</p>
                             </div>
                             <div class = "col-6 px-5">
-                                <input name = "actMuertes" type="text" class="form-control" id="actMuertes" value=<?php echo $muertes?>>
+                                <input name = "actMuertes" type="text" class="form-control" id="actMuertes" placeholder="ej: 7" value=<?php echo $muertes?>>
                             </div>
                         </div>
                         <div class ="row p-4 mx-5 float-end">
                             <div class = "col-4">
-                                <button type = "button" class = "btn btn-primary" onclick="comprobarDatosIntroducidos()">Actualizar</button>
+                                <?php if ($partida != null) : ?>
+                                    <button type = "button" class = "btn btn-primary" onclick="comprobarDatosIntroducidos()">Actualizar</button>
+                                <?php else : ?>
+                                    <button type = "button" class = "btn btn-primary" onclick="comprobarDatosIntroducidos()">Añadir</button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </form>
@@ -165,26 +190,40 @@ if (!isset($_SESSION['username'])) {
             </div>
                     <div class="my-3 my-md-3 bg-white"></div>
                     <div class="p-4 p-md-5 bg-white">
-                            <div class="row">
-                                <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
-                                    <div class="container bg-dark rounded p-0">
-                                        <img class="imgCuadrada" src="../img/juancarsecae.png">
-                                        <div class="container text-white p-2 text-center">
-                                            <h1>Grandes oponentes</h1>
-                                        </div>
+                        <div class="row">
+                            <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
+                                <div class="container bg-dark rounded p-0">
+                                    <img class="imgCuadrada" src="../img/fb1.png">
+                                    <div class="container text-white p-2 text-center">
+                                        <h3>Compite contra otros jugadores</h3>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6 col-lg-3 my-lg-0 mb-3">
-                                    <div class="container bg-dark p-4 rounded"></div>
-                                </div>
-                                <div class="col-12 col-sm-6 col-lg-3 my-lg-0 mb-3">
-                                    <div class="container bg-dark p-4 rounded"></div>
-                                </div>
-                                <div class="col-12 col-sm-6 col-lg-3 my-lg-0 mb-3">
-                                    <div class="container bg-dark p-4 rounded"></div>
+                            </div>
+                            <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
+                                <div class="container bg-dark rounded p-0">
+                                <img class="imgCuadrada" src="../img/fb2.png">
+                                    <div class="container text-white p-2 text-center">
+                                        <h3>Participa en torneos exclusivos</h3>
+                                    </div>
                                 </div>
                             </div>
-                    </div>
+                            <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
+                                <div class="container bg-dark rounded p-0">
+                                <img class="imgCuadrada" src="../img/fb3.png">
+                                    <div class="container text-white p-2 text-center">
+                                        <h3>Gana recompensas para el juego</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
+                                <div class="container bg-dark rounded p-0">
+                                <img class="imgCuadrada" src="../img/fb4.png">
+                                    <div class="container text-white p-2 text-center">
+                                        <h3>Únete a tus amigos para ser invatibles</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div class="my-md-5 bg-white"></div>
                 </div>
             

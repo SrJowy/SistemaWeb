@@ -1,12 +1,22 @@
 <?php
 session_start();
+$db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+if (!$db) {
+    echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
+    echo "errno de depuración: " . mysqli_connect_errno() . PHP_EOL;
+    echo "error de depuración: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+$query = "SELECT nombreUsuario, SUM(puntos) FROM partida GROUP BY nombreUsuario ORDER BY SUM(puntos) DESC LIMIT 3;";  
+$res = mysqli_query($db, $query);
+$i = 0;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Call of Stats</title>
+    <title>Call of Data</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='second.css'>
@@ -26,21 +36,22 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link active" href="#">Inicio</a>
                         </li>
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a class="nav-link" href="#">Novedades</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Base de datos</a>
-                        </li>
+                        </li>-->
                     </ul>
                     <?php if (!isset($_SESSION['username'])) : ?>
                         <button onclick="location.href='inicioSesion.php'" type="button" class="btn btn-outline-dark me-2">Iniciar sesión</button>
                         <button onclick="location.href='registro.php'" type="button" class="btn btn-dark">Crear cuenta</button>
                     <?php endif ?>
                     <?php if (isset($_SESSION['username'])) : ?>
+                        <p class = "p-3 pb-0"><?php echo $_SESSION['success']; ?></p>
                         <div class= "dropdown me-5">
-                            <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="img/userphoto.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                            <a href="#" class ="d-block link-dark text-decoration-none dropdown-toggle me-5" id = 'dropUser' data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="img/av1.png" alt="mdo" width="32" height="32" class="rounded-circle">
                             </a>
                             <ul class ="dropdown-menu text-small" aria-labelledby="dropUser" style>
                                 <li>
@@ -69,43 +80,22 @@ session_start();
                         <button type="button" class="btn btn-secondary" onclick="location.href='registro.php'">Crear cuenta</button>
                     </div>
                     <div class ="col-12 col-lg-6 mt-3 mt-lg-0">
-                            <h3 class="text-center">Top 3 de la semana</h3>
-                            <div class="container my-3 px-md-6">
-                                <div class="p-4 rounded bg-white text-dark text-end">
-                                    <div class = "row">
-                                        <div class="col-4">
-                                            <img src="img/av1.png" class="imgRedonda">
-                                        </div>
-                                        <div class="col-8">
-                                            <p class="my-4">#1 - HHHHHHHHHH</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container my-3 px-md-6">
-                                <div class="p-4 rounded bg-white text-dark text-end">
-                                    <div class = "row">
-                                        <div class="col-4">
-                                            <img src="img/av2.png" class="imgRedonda">
-                                        </div>
-                                        <div class="col-8">
-                                            <p class="my-4">#2 - HHHHHH</p>
+                            <h3 class="text-center">Top 3 jugadores</h3>
+                            <?php while ($row = mysqli_fetch_array ($res)) : 
+                                $i++;?>
+                                <div class="container my-3 px-md-6">
+                                    <div class="p-4 rounded bg-white text-dark text-end">
+                                        <div class = "row">
+                                            <div class="col-4">
+                                                <img src="img/av1.png" class="imgRedonda">
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="my-4">#<?php echo "{$i} - {$row['nombreUsuario']}"; ?></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="container my-3 px-md-6">
-                                <div class="p-4 rounded bg-white text-dark text-end">
-                                    <div class = "row">
-                                        <div class="col-4">
-                                            <img src="img/av3.png" class="imgRedonda">
-                                        </div>
-                                        <div class="col-8">
-                                            <p class="my-4">#3 - HHHHHH</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php endwhile; ?>
                         </div>
                     </div>
                 </div>
@@ -114,20 +104,35 @@ session_start();
                         <div class="row">
                             <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
                                 <div class="container bg-dark rounded p-0">
-                                    <img class="imgCuadrada" src="img/juancarsecae.png">
+                                    <img class="imgCuadrada" src="img/fb1.png">
                                     <div class="container text-white p-2 text-center">
-                                        <h1>Grandes oponentes</h1>
+                                        <h3>Compite contra otros jugadores</h3>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-6 col-lg-3 my-lg-0 mb-3">
-                                <div class="container bg-dark p-4 rounded"></div>
+                            <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
+                                <div class="container bg-dark rounded p-0">
+                                <img class="imgCuadrada" src="img/fb2.png">
+                                    <div class="container text-white p-2 text-center">
+                                        <h3>Participa en torneos exclusivos</h3>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-12 col-sm-6 col-lg-3 my-lg-0 mb-3">
-                                <div class="container bg-dark p-4 rounded"></div>
+                            <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
+                                <div class="container bg-dark rounded p-0">
+                                <img class="imgCuadrada" src="img/fb3.png">
+                                    <div class="container text-white p-2 text-center">
+                                        <h3>Gana recompensas para el juego</h3>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-12 col-sm-6 col-lg-3 my-lg-0 mb-3">
-                                <div class="container bg-dark p-4 rounded"></div>
+                            <div class="mx-auto mx-sm-0 col-8 col-sm-6 col-lg-3 my-lg-0 mb-3">
+                                <div class="container bg-dark rounded p-0">
+                                <img class="imgCuadrada" src="img/fb4.png">
+                                    <div class="container text-white p-2 text-center">
+                                        <h3>Únete a tus amigos para ser invatibles</h3>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                 </div>

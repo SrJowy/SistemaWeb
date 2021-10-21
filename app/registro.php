@@ -21,19 +21,19 @@ session_start();
             <form name="reg" action="registro_server.php" method="POST">
                 <div id="c1" class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
-                    <input name = "nombre" type="text" class="form-control" id="controlName">
+                    <input name = "nombre" type="text" class="form-control" id="controlName" placeholder = "ej: Antonio">
                 </div>
                 <div id = "c2" class="mb-3">
                     <label for="surnames" class="form-label">Apellidos</label>
-                    <input name= "apellidos" type="text" class="form-control" id="controlSurname">
+                    <input name= "apellidos" type="text" class="form-control" id="controlSurname" placeholder = "ej: Pérez Gómez">
                 </div>
                 <div id = "c3" class="mb-3">
                     <label for="id" class="form-label">DNI</label>
-                    <input name = "dni" type="text" class="form-control" id="controlDNI">
+                    <input name = "dni" type="text" class="form-control" id="controlDNI" placeholder = "ej: 11111111Z">
                 </div>
                 <div id = "c4" class="mb-3">
                     <label for="tel" class="form-label">Teléfono</label>
-                    <input name = "tel" type="tel" class="form-control" id="controlTel">
+                    <input name = "tel" type="tel" class="form-control" id="controlTel" placeholder = "ej: 660066006">
                 </div>
                 <div id = "c5" class="mb-3">
                     <label for="date" class="form-label">Fecha de nacimiento</label>
@@ -41,11 +41,11 @@ session_start();
                 </div>
                 <div id = "c6" class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
-                    <input name = "email" type="email" class="form-control" id="controlEmail">
+                    <input name = "email" type="email" class="form-control" id="controlEmail" placeholder = "ej: ejemplo@gmail.com">
                 </div>
                 <div id = "c7" class="mb-3">
                     <label for="usern" class="form-label">Nombre de usuario</label>
-                    <input name= "username" type="text" class="form-control" id="controlUsername">
+                    <input name= "username" type="text" class="form-control" id="controlUsername" placeholder = "ej: AnttonPer3">
                 </div>
                 <div id = "c8" class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>

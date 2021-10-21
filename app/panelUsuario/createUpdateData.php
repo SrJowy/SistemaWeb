@@ -1,7 +1,7 @@
 <?php
 session_start();
 $username = $_SESSION['username'];
-$db = mysqli_connect('localhost', 'root', 'f34HJ5L8.', 'webapp');
+$db = mysqli_connect('localhost', 'root', 'root', 'webapp');
 $partidaAct = $_SESSION['partidaAct'];
 $numP = $_POST['actIDPartida'];
 $mapa = $_POST['actMapa'];

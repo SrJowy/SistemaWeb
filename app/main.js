@@ -99,7 +99,7 @@ function comprobarNumero() {
     eliminarHijo('tlf')
     let e = false;
     let num = document.getElementById("actNum").value
-    if(!esTel(num)) {
+    if(contieneNumeros(num)) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
         var t = document.createTextNode("Teléfono incorrecto");
@@ -110,6 +110,58 @@ function comprobarNumero() {
     }
 
     if (!e) document.actNum.submit();
+}
+
+function comprobarNums(s,elim) {
+    eliminarHijo(elim)
+    let e = false;
+    let num = document.getElementById(s).value
+    if(contieneNumeros(num)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("No se pueden poner números");
+        er.setAttribute('id', 'eNums')
+        er.appendChild(t)
+        document.getElementById(elim).appendChild(er)
+        e= true;
+    }
+
+    if (!e && s == "actApellidos") document.actApellidos.submit();
+    else if (!e && s == "actNombre") document.actNombre.submit();
+}
+
+function comprobarFecha() {
+    eliminarHijo('fecha')
+    let e = false;
+    let fecha = document.getElementById("actFecha").value
+    if(!esFecha(fecha)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("La fecha no es válida");
+        er.setAttribute('id', 'eFecha')
+        er.appendChild(t)
+        document.getElementById('fecha').appendChild(er)
+        e= true;
+    }
+
+    if (!e) document.actFecha.submit();
+}
+
+function comprobarDNI() {
+    eliminarHijo('dni')
+    let e = false;
+    let dni = document.getElementById("actDni").value
+    if(!esCorrecto(dni)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("El DNI no es correcto");
+        er.setAttribute('id', 'eDni')
+        er.appendChild(t)
+        document.getElementById('dni').appendChild(er)
+        e= true;
+    }
+
+    if (!e) document.actDni.submit();
 }
 
 function comprobarNombreUsuario() {
@@ -227,18 +279,10 @@ function esCorreo(em) {
     if (em.length == 0) {
         return false
     } else {
-        if (em.includes('@') && em.includes('.')) {
-            exten = em.split('.')
-            lExt = ["com", "org", "net", "de", "ru", "uk", "es"]
-            if (lExt.includes(exten[1])) {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return false
-        }
-        
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(em)) //Expresión regular para comprobar que es un correo correcto
+            return true;
+        else
+            return false;
     }
 }
 
