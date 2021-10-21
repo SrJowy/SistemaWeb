@@ -34,7 +34,7 @@ function actualizarCorreo() {
         mysqli_query($db, $query);
         $_SESSION['successActMail'] = true;
     }
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
 
 }
 
@@ -46,7 +46,7 @@ function actualizarTel() {
     $query = "UPDATE usuario SET telefono = '$tel' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActNum'] = true;
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
 }
 
 function actualizarNombreUsuario() {
@@ -66,7 +66,7 @@ function actualizarNombreUsuario() {
         $_SESSION['successActUser'] = true;
         $_SESSION['username'] = $NnombreUsuario;
     }
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
 }
 
 function actualizarContra() {
@@ -78,7 +78,7 @@ function actualizarContra() {
     $query = "UPDATE usuario SET contra = '$contraN' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActContra'] = true;
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
     
 }
 
@@ -90,7 +90,7 @@ function actualizarNombre() {
     $query = "UPDATE usuario SET nombre = '$nombre' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActNombre'] = true;
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
     
 }
 
@@ -102,7 +102,7 @@ function actualizarApellidos() {
     $query = "UPDATE usuario SET apellidos = '$apellidos' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActApellidos'] = true;
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
     
 }
 
@@ -114,7 +114,7 @@ function actualizarFecha() {
     $query = "UPDATE usuario SET fecha_nac = '$fecha' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActFecha'] = true;
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
 }
 
 function actualizarDni() {
@@ -125,7 +125,7 @@ function actualizarDni() {
     $query = "UPDATE usuario SET dni = '$dni' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
     $_SESSION['successActDni'] = true;
-    header('location: cambiarDatos.php');
+    header('location: ../cambiarDatos.php');
 }
 
 ?>

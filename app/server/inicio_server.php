@@ -12,10 +12,10 @@ $usuario = mysqli_fetch_assoc($res);
 if ($usuario) {
     $_SESSION['username'] = $nombre;
     $_SESSION['success'] = "Hola, $nombre";
-    header('location: index.php');
+    header('location: ../index.php');
 } else {
     $_SESSION['errUserContra'] = true;
-    header('location: inicioSesion.php');
+    header('location: ../inicioSesion.php');
 }
 
 

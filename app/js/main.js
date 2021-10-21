@@ -279,7 +279,8 @@ function esCorreo(em) {
     if (em.length == 0) {
         return false
     } else {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(em)) //Expresión regular para comprobar que es un correo correcto
+        re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+        if (re.exec(em)) //Expresión regular para comprobar que es un correo correcto
             return true;
         else
             return false;

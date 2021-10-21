@@ -39,9 +39,9 @@ if ($usuarioMail || $usuarioNombre) {
 if (!$error){
     $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
     $res = mysqli_query($db, $query);
-    header('location: index.php');
+    header('location: ../index.php');
 } else {    
-    header('location: registro.php');
+    header('location: ../registro.php');
 }
 
 

@@ -8,8 +8,8 @@ session_start();
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Registro</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='second.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/second.css'>
     <script src='bootstrap.bundle.js'></script>
     <script src='main.js'></script>
 </head>
@@ -18,7 +18,7 @@ session_start();
         <h1>Registro</h1>
     </div>
         <div id="princ" class = "contenedorRegistro margenRegistro p-5 bordeRegistro rounded-3">
-            <form name="reg" action="registro_server.php" method="POST">
+            <form name="reg" action="server/registro_server.php" method="POST">
                 <div id="c1" class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
                     <input name = "nombre" type="text" class="form-control" id="controlName" placeholder = "ej: Antonio">

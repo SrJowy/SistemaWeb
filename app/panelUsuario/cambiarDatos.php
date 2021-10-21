@@ -20,10 +20,10 @@ if (!isset($_SESSION['username'])) {
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Call of Data</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../second.css'>
-    <script src='../bootstrap.bundle.js'></script>
-    <script src='../main.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='../css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../css/second.css'>
+    <script src='../js/bootstrap.bundle.js'></script>
+    <script src='../js/main.js'></script>
 </head>
 <body>
     <div class="container">
@@ -61,7 +61,7 @@ if (!isset($_SESSION['username'])) {
                                     <a class="dropdown-item" href="#">Panel Usuario</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../cerrar.php">Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="../server/cerrar.php">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </div>
@@ -124,7 +124,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nuevo nombre: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "nombre">
-                                    <form name= "actNombre" action="actualizar_data.php" method="POST">
+                                    <form name= "actNombre" action="server/actualizar_data.php" method="POST">
                                         <input name = "actNombre" type="text" class="form-control" id="actNombre" placeholder="ej: Antonio">
                                     </form>
                                         <?php if (isset($_SESSION['successActNombre'])) : ?>
@@ -151,7 +151,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nuevos apellidos: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "apellidos">
-                                    <form name= "actApellidos" action="actualizar_data.php" method="POST">
+                                    <form name= "actApellidos" action="server/actualizar_data.php" method="POST">
                                         <input name = "actApellidos" type="text" class="form-control" id="actApellidos" placeholder="ej: Pérez Gómez">
                                     </form>
                                         <?php if (isset($_SESSION['successActApellidos'])) : ?>
@@ -178,7 +178,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nuevo DNI: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "dni">
-                                    <form name= "actDni" action="actualizar_data.php" method="POST">
+                                    <form name= "actDni" action="server/actualizar_data.php" method="POST">
                                         <input name = "actDni" type="text" class="form-control" id="actDni" placeholder="ej: 11111111Z">
                                     </form>
                                         <?php if (isset($_SESSION['successActDni'])) : ?>
@@ -205,7 +205,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nueva fecha: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "fecha">
-                                    <form name= "actFecha" action="actualizar_data.php" method="POST">
+                                    <form name= "actFecha" action="server/actualizar_data.php" method="POST">
                                         <input name = "actFecha" type="date" class="form-control" id="actFecha">
                                     </form>
                                         <?php if (isset($_SESSION['successActFecha'])) : ?>
@@ -232,7 +232,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nuevo correo electrónico: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "correo">
-                                    <form name= "actCorreo" action="actualizar_data.php" method="POST">
+                                    <form name= "actCorreo" action="server/actualizar_data.php" method="POST">
                                         <input name = "actCorreo" type="email" class="form-control" id="actCorreo" placeholder="ej: ejemplo@gmail.com">
                                     </form>
                                         <?php if (isset($_SESSION['errorActMail'])) : ?>
@@ -261,7 +261,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nuevo nombre de usuario: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "nomUsuario">
-                                    <form name= "actUsername" action="actualizar_data.php" method="POST">
+                                    <form name= "actUsername" action="server/actualizar_data.php" method="POST">
                                         <input name = "actUsername" type="text" class="form-control" id="actUsername" placeholder="ej: AnttonPer3">
                                     </form>
                                         <?php if (isset($_SESSION['errorActUser'])) : ?>
@@ -289,7 +289,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nuevo teléfono:  </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "tlf">
-                                    <form name= "actNum" action="actualizar_data.php" method="POST">
+                                    <form name= "actNum" action="server/actualizar_data.php" method="POST">
                                         <input name = "actNum" type="tel" class="form-control" id="actNum" placeholder="ej: 660066006">
                                     </form>
                                         <?php if (isset($_SESSION['successActNum'])) : ?>
@@ -310,7 +310,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Contraseña actual: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "contraAct">
-                                    <form name= "actContraAct" action="actualizar_data.php" method="POST">
+                                    <form name= "actContraAct" action="server/actualizar_data.php" method="POST">
                                         <input name = "actContraAct" type="password" class="form-control" id="actContraAct">
                                     </form>
                                 </div>
@@ -320,7 +320,7 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nueva contraseña: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "contraNueva">
-                                    <form name= "actContraNueva" action="actualizar_data.php" method="POST">
+                                    <form name= "actContraNueva" action="server/actualizar_data.php" method="POST">
                                         <input name = "actContraNueva" type="password" class="form-control" id="actContraNueva">
                                     </form>
                                         <?php if (isset($_SESSION['successActContra'])) : ?>

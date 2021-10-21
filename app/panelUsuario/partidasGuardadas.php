@@ -25,11 +25,11 @@ if (!isset($_SESSION['username'])) {
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Call of Data</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../second.css'>
-    <script src='../bootstrap.bundle.js'></script>
-    <script src='../main.js'></script>
-    <script src='eliminar.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='../css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../css/second.css'>
+    <script src='../js/bootstrap.bundle.js'></script>
+    <script src='../js/main.js'></script>
+    <script src='js/eliminar.js'></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
         rel="stylesheet"  type='text/css'> <!--- Iconos --->
 
@@ -70,7 +70,7 @@ if (!isset($_SESSION['username'])) {
                                     <a class="dropdown-item" href="#">Panel Usuario</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../cerrar.php">Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="../server/cerrar.php">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </div>

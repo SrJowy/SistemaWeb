@@ -18,15 +18,15 @@ $i = 0;
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Call of Data</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='second.css'>
-    <script src='bootstrap.bundle.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/second.css'>
+    <script src='js/bootstrap.bundle.js'></script>
 </head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Call of Stats</a>
+                <a class="navbar-brand" href="#">Call of Data</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navi" aria-control="navi" 
                 aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -58,7 +58,7 @@ $i = 0;
                                     <a class="dropdown-item" href="panelUsuario/cambiarDatos.php">Panel Usuario</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="cerrar.php">Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="server/cerrar.php">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </div>

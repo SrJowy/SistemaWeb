@@ -19,5 +19,5 @@ if ($partida) {
     $query = "INSERT INTO partida VALUES ('$numP', '$mapa', '$puntos', '$bajas', '$muertes', '$username');";
 }
 mysqli_query($db,$query);
-header('location: partidasGuardadas.php');
+header('location: ../partidasGuardadas.php');
 ?>
