@@ -21,7 +21,7 @@ if (isset($_POST['actCorreo'])) {
 function actualizarCorreo() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $correo = $_POST['actCorreo'];
     $user_check_query = "SELECT * FROM usuario WHERE email = '$correo';";
     $res = mysqli_query($db, $user_check_query);
@@ -41,7 +41,7 @@ function actualizarCorreo() {
 function actualizarTel() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $tel = $_POST['actNum'];
     $query = "UPDATE usuario SET telefono = '$tel' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
@@ -52,7 +52,7 @@ function actualizarTel() {
 function actualizarNombreUsuario() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $NnombreUsuario = $_POST['actUsername'];
     $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$NnombreUsuario';";
     $res = mysqli_query($db, $user_check_query);
@@ -72,7 +72,7 @@ function actualizarNombreUsuario() {
 function actualizarContra() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $contraN = $_POST['actContraNueva'];
     $contraAct = $_POST['actContraAct'];
     $query = "UPDATE usuario SET contra = '$contraN' WHERE nombreUsuario = '$nombreUsuario';";
@@ -85,7 +85,7 @@ function actualizarContra() {
 function actualizarNombre() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $nombre = $_POST['actNombre'];
     $query = "UPDATE usuario SET nombre = '$nombre' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
@@ -97,7 +97,7 @@ function actualizarNombre() {
 function actualizarApellidos() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $apellidos = $_POST['actApellidos'];
     $query = "UPDATE usuario SET apellidos = '$apellidos' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
@@ -109,7 +109,7 @@ function actualizarApellidos() {
 function actualizarFecha() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $fecha = $_POST['actFecha'];
     $query = "UPDATE usuario SET fecha_nac = '$fecha' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);
@@ -120,7 +120,7 @@ function actualizarFecha() {
 function actualizarDni() {
     session_start();
     $nombreUsuario = $_SESSION['username'];
-    $db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
     $dni = $_POST['actDni'];
     $query = "UPDATE usuario SET dni = '$dni' WHERE nombreUsuario = '$nombreUsuario';";
     mysqli_query($db, $query);

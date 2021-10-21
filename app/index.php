@@ -1,6 +1,6 @@
 <?php
 session_start();
-$db = mysqli_connect('localhost', 'root', 'root', 'webapp');
+$db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
 if (!$db) {
     echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
     echo "errno de depuración: " . mysqli_connect_errno() . PHP_EOL;
