@@ -70,9 +70,9 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`nombre`, `apellidos`, `dni`, `telefono`, `fecha_nac`, `email`, `contra`, `nombreUsuario`) VALUES
 ('Bosco', 'Aranguren', '65004204V', 760242495, '2001-04-03', 'bosco@gmail.com', '987654321', 'boscoaran'),
-('Joel', 'Bra Ortiz', '22756654V', 634277609, '2001-07-09', 'joelbraortiz@gmail.com', '123456', 'JuanAntonio'),
-('Juan', 'Alfonso', '22766905X', 944781748, '2003-07-09', 'juand@gmail.com', 'AVEMARIA', 'MariaAA'),
-('Joel', 'Bra Ortiz', '22756654V', 987654321, '2001-07-09', 'joelbraortiz@hotmail.com', 'HJELXL14', 'SrJowy');
+('Joel', 'Bra Ortiz', '22756654V', 634277690, '2001-07-09', 'jbra@gmail.com', '123456', 'JoelTest'),
+('Juan', 'Alfonso', '22766905X', 944781748, '2003-07-09', 'juand@gmail.com', '987654321', 'JuanAn'),
+('Joel', 'Bra Ortiz', '22756654V', 987654321, '2001-07-09', 'joelbraortiz@hotmail.com', '987654321', 'SrJowy');
 
 --
 -- Índices para tablas volcadas
