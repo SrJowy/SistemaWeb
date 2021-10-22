@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
+$db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
 $nombre = $_POST['nombre'];
 $contra = $_POST['pass'];
 

@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header('location: index.php');
 } else {
-    $db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
+    $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $user = $_SESSION['username'];
     $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$user';";
     $res = mysqli_query($db, $user_check_query);

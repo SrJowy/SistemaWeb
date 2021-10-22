@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 21-10-2021 a las 23:54:25
+-- Tiempo de generación: 22-10-2021 a las 13:00:59
 -- Versión del servidor: 8.0.26-0ubuntu1
 -- Versión de PHP: 8.0.8
 
@@ -18,10 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `webapp`
+-- Base de datos: `database`
 --
-CREATE DATABASE IF NOT EXISTS `webapp` DEFAULT CHARACTER SET utf8mb4;
-USE `webapp`;
 
 -- --------------------------------------------------------
 
@@ -73,8 +71,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`nombre`, `apellidos`, `dni`, `telefono`, `fecha_nac`, `email`, `contra`, `nombreUsuario`) VALUES
 ('Bosco', 'Aranguren', '65004204V', 760242495, '2001-04-03', 'bosco@gmail.com', '987654321', 'boscoaran'),
 ('Joel', 'Bra Ortiz', '22756654V', 634277609, '2001-07-09', 'joelbraortiz@gmail.com', '123456', 'JuanAntonio'),
-('Juan', 'Alfonso', '22766905X', 944781748, '2003-07-09', 'juand@gmail.com', '987654321', 'JuanD'),
-('Joel', 'Bra Ortiz', '22756654V', 987654321, '2001-07-09', 'joelbraortiz@hotmail.com', '987654321', 'SrJowy');
+('Juan', 'Alfonso', '22766905X', 944781748, '2003-07-09', 'juand@gmail.com', 'AVEMARIA', 'MariaAA'),
+('Joel', 'Bra Ortiz', '22756654V', 987654321, '2001-07-09', 'joelbraortiz@hotmail.com', 'HJELXL14', 'SrJowy');
 
 --
 -- Índices para tablas volcadas

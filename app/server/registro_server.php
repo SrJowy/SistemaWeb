@@ -10,7 +10,7 @@ $email = "";
 $nombreUsuario="";
 $contra = "";
 
-$db = mysqli_connect('172.17.0.2:3306', 'root', 'root', 'webapp');
+$db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
 $dni = $_POST['dni'];
