@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
 } else {
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $user = $_SESSION['username'];
-    $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$user';";
+    $user_check_query = "SELECT *, DATE_FORMAT(fecha_nac, '%d/%m/%Y') AS fech FROM usuario WHERE nombreUsuario = '$user';";
     $res = mysqli_query($db, $user_check_query);
     $usuario = mysqli_fetch_assoc($res);
     $query = "SELECT SUM(puntos) FROM partida WHERE nombreUsuario = '$user';";
@@ -196,7 +196,7 @@ if (!isset($_SESSION['username'])) {
                                 </div>
                                 <div class="col-lg-8 ps-5 text-start">
                                     <?php
-                                    echo $usuario['fecha_nac'];
+                                    echo $usuario['fech'];
                                     ?>
                                 </div>
                             </div>
