@@ -10,8 +10,8 @@ session_start();
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/second.css'>
-    <script src='bootstrap.bundle.js'></script>
-    <script src='main.js'></script>
+    <script src='js/bootstrap.bundle.js'></script>
+    <script src='js/main.js'></script>
 </head>
 <body>
     <div class= "container text-center mt-5">

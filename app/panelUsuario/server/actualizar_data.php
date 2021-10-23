@@ -63,8 +63,11 @@ function actualizarNombreUsuario() {
     } else {
         $query = "UPDATE usuario SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';";
         mysqli_query($db, $query);
+        $query = "UPDATE partida SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';";
+        mysqli_query($db, $query);
         $_SESSION['successActUser'] = true;
         $_SESSION['username'] = $NnombreUsuario;
+        $_SESSION['success'] = "Hola, $NnombreUsuario";
     }
     header('location: ../cambiarDatos.php');
 }

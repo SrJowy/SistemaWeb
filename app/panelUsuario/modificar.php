@@ -10,7 +10,12 @@ if (!isset($_SESSION['username'])) {
     $usuario = mysqli_fetch_assoc($res);
 
     //Obtener variables a modificar
-    $partida = $_POST['partida'];
+    if (isset($_SESSION['partidaAnt'])) {
+        $partida = $_SESSION['partidaAnt'];
+    } else {
+        $partida = $_POST['partida'];
+    }
+    
     $mapa = $_POST['mapa'];
     $puntos = $_POST['puntos'];
     $bajas = $_POST['bajas'];
@@ -127,14 +132,21 @@ if (!isset($_SESSION['username'])) {
                         <?php else : ?>
                             <h3>Añadir una partida</h3>
                         <?php endif; ?>
+                        <?php if (isset($_SESSION['errorPartidaExiste'])) : ?>
+                            <p class = "text-danger">Esa partida ya está registrada</p>
+                        <?php endif; ?>
                     </div>
                     <form name="createUpdateData" action="server/createUpdateData.php" method="POST">
                         <div class = "row p-4 pb-0">
                             <div class = "col-4 text-end p-2">
                                 <p class = "pb-0">ID de la partida:</p>
                             </div>
-                            <div class = "col-6 px-5">
-                                <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" placeholder="ej: FFFF0000" value=<?php echo $partida?>>
+                            <div class = "col-6 px-5" id = "idPartida">
+                                <?php if (!isset($_SESSION['numP'])) : ?>
+                                    <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" placeholder="ej: FFFF0000" value=<?php echo $partida?>>
+                                <?php else : ?>
+                                    <input name = "actIDPartida" type="text" class="form-control" id="actIDPartida" placeholder="ej: FFFF0000" value=<?php echo $_SESSION['numP']?>>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class = "row p-4 pb-0">
@@ -143,9 +155,9 @@ if (!isset($_SESSION['username'])) {
                             </div>
                             <div class = "col-6 px-5 p-2">
                                 <select id ="actMapa" name= "actMapa">
-                                    <option value="The Pines" <?php if ($mapa == "The Pines") : ?> selected <?php endif; ?>>The Pines</option>
-                                    <option value="Nuketown" <?php if ($mapa == "Nuketown") : ?> selected <?php endif; ?>>Nuketown</option>
-                                    <option value="Cartel" <?php if ($mapa == "Cartel") : ?> selected <?php endif; ?>>Cartel</option>
+                                    <option value="The Pines" <?php if ($mapa == "The Pines" || $_SESSION['mapa'] == "The Pines") : ?> selected <?php endif; ?>>The Pines</option>
+                                    <option value="Nuketown" <?php if ($mapa == "Nuketown" || $_SESSION['mapa'] == "Nuketown") : ?> selected <?php endif; ?>>Nuketown</option>
+                                    <option value="Cartel" <?php if ($mapa == "Cartel" || $_SESSION['mapa'] == "Cartel") : ?> selected <?php endif; ?>>Cartel</option>
                                 </select>
                             </div>
                         </div>
@@ -153,24 +165,36 @@ if (!isset($_SESSION['username'])) {
                             <div class = "col-4 text-end p-2">
                                 <p class = "pb-0">Puntos:</p>
                             </div>
-                            <div class = "col-6 px-5">
-                                <input name = "actPuntos" type="text" class="form-control" id="actPuntos" placeholder="ej: 24000" value=<?php echo $puntos?>>
+                            <div class = "col-6 px-5" id ="puntos">
+                                <?php if (!isset($_SESSION['puntos'])) : ?>
+                                    <input name = "actPuntos" type="text" class="form-control" id="actPuntos" placeholder="ej: 24000" value=<?php echo $puntos?>>
+                                <?php else : ?>
+                                    <input name = "actPuntos" type="text" class="form-control" id="actPuntos" placeholder="ej: 24000" value=<?php echo $_SESSION['puntos']?>>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class = "row p-4 pb-0">
                             <div class = "col-4 text-end p-2">
                                 <p class = "pb-0">Bajas:</p>
                             </div>
-                            <div class = "col-6 px-5">
-                                <input name = "actBajas" type="text" class="form-control" id="actBajas" placeholder="ej: 15" value=<?php echo $bajas?>>
+                            <div class = "col-6 px-5" id ="bajas">
+                                <?php if (!isset($_SESSION['bajas'])) : ?>
+                                    <input name = "actBajas" type="text" class="form-control" id="actBajas" placeholder="ej: 15" value=<?php echo $bajas?>>
+                                <?php else : ?>
+                                    <input name = "actBajas" type="text" class="form-control" id="actBajas" placeholder="ej: 15" value=<?php echo $_SESSION['bajas']?>>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class = "row p-4 pb-0">
                             <div class = "col-4 text-end p-2">
                                 <p class = "pb-0">Muertes:</p>
                             </div>
-                            <div class = "col-6 px-5">
-                                <input name = "actMuertes" type="text" class="form-control" id="actMuertes" placeholder="ej: 7" value=<?php echo $muertes?>>
+                            <div class = "col-6 px-5" id="muertes">
+                                <?php if (!isset($_SESSION['muertes'])) : ?>
+                                    <input name = "actMuertes" type="text" class="form-control" id="actMuertes" placeholder="ej: 7" value=<?php echo $muertes?>>
+                                <?php else : ?>
+                                    <input name = "actMuertes" type="text" class="form-control" id="actMuertes" placeholder="ej: 7" value=<?php echo $_SESSION['muertes']?>>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class ="row p-4 mx-5 float-end">
@@ -243,5 +267,12 @@ unset($_SESSION['successActMail']);
 unset($_SESSION['successActNum']);
 unset($_SESSION['successActUser']);
 unset($_SESSION['errorActUser']);
-unset($_SESSION['successActContra'])
+unset($_SESSION['successActContra']);
+unset($_SESSION['errorPartidaExiste']);
+unset($_SESSION['numP']);
+unset($_SESSION['mapa']);
+unset($_SESSION['bajas']);
+unset($_SESSION['puntos']);
+unset($_SESSION['muertes']);
+unset($_SESSION['partidaAnt']);
 ?>

@@ -154,7 +154,7 @@ if (!isset($_SESSION['username'])) {
                                         <h4>Mapa: <?php echo $mapa ?></h4>
                                     </div>
                                     <div class = "row mx-5 ms-5 my-3">
-                                        <form id="partida_<?php echo $num_partida?>" name="partida_<?php echo $num_partida?>" method="POST" action="eliminar_partida.php">
+                                        <form id="partida_<?php echo $num_partida?>" name="partida_<?php echo $num_partida?>" method="POST" action="server/eliminar_partida.php">
                                             <input type = "hidden" name="partida" value="<?php echo $num_partida?>">
                                             <button type="button" name="<?php echo $num_partida?>" id="<?php echo $num_partida?>" class ="btn btn-outline-danger ms-3" onclick="eliminarPartida(this)"><i class="fa fa-close me-3"></i>Eliminar partida</button>
                                         </form>
@@ -265,5 +265,6 @@ unset($_SESSION['successActMail']);
 unset($_SESSION['successActNum']);
 unset($_SESSION['successActUser']);
 unset($_SESSION['errorActUser']);
-unset($_SESSION['successActContra'])
+unset($_SESSION['successActContra']);
+unset($_SESSION['partidaAct']);
 ?>

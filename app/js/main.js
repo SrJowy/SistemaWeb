@@ -6,6 +6,7 @@ function comprobardatos() {
     let fecha = document.getElementById("controlFecha").value;
     let email = document.getElementById("controlEmail").value;
     let contra = document.getElementById("controlPass").value;
+    let username = document.getElementById("controlUsername").value;
     let e = false;
 
     eliminarHijos();
@@ -65,6 +66,26 @@ function comprobardatos() {
         er.setAttribute('id', 'eCor')
         er.appendChild(t)
         document.getElementById("c6").appendChild(er)
+        e= true
+    }
+
+    if (username.length == 0 || username.length > 8) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("El nombre de usuario tiene que tener como máximo 8 caracteres")
+        er.setAttribute('id', 'eUsername')
+        er.appendChild(t)
+        document.getElementById("c7").appendChild(er)
+        e= true
+    }
+
+    if (contra.length == 0) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("EL campo no puede estar vacío")
+        er.setAttribute('id', 'eContra')
+        er.appendChild(t)
+        document.getElementById("c8").appendChild(er)
         e= true
     }
 
@@ -168,7 +189,7 @@ function comprobarNombreUsuario() {
     eliminarHijo('nomUsuario')
     let e = false;
     let username = document.getElementById("actUsername").value
-    if(username.length > 9) { //Ponerlo en el registro
+    if(username.length > 9 || username.length == 0) { //Ponerlo en el registro
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
         var t = document.createTextNode("Nombre de usuario no válido");
@@ -208,7 +229,7 @@ function comprobarContra() {
 }
 
 function eliminarHijos() {
-    for (var i =1; i< 8; i++) {
+    for (var i =1; i< 9; i++) {
         var c = "c" + i
         var elem = document.getElementById(c)
         if (elem.lastChild.nodeName == 'P') {
