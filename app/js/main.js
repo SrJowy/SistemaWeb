@@ -69,20 +69,20 @@ function comprobardatos() {
         e= true
     }
 
-    if (username.length == 0 || username.length > 8) {
+    if (username.length == 0 || username.length > 9) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
-        var t = document.createTextNode("El nombre de usuario tiene que tener como máximo 8 caracteres")
+        var t = document.createTextNode("El nombre de usuario tiene que tener como máximo 9 caracteres")
         er.setAttribute('id', 'eUsername')
         er.appendChild(t)
         document.getElementById("c7").appendChild(er)
         e= true
     }
 
-    if (contra.length == 0) {
+    if (contra.length < 8) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
-        var t = document.createTextNode("EL campo no puede estar vacío")
+        var t = document.createTextNode("La contraseña debe tener al menos 8 caracteres")
         er.setAttribute('id', 'eContra')
         er.appendChild(t)
         document.getElementById("c8").appendChild(er)
@@ -189,10 +189,10 @@ function comprobarNombreUsuario() {
     eliminarHijo('nomUsuario')
     let e = false;
     let username = document.getElementById("actUsername").value
-    if(username.length > 9 || username.length == 0) { //Ponerlo en el registro
+    if(username.length > 9 || username.length == 0) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
-        var t = document.createTextNode("Nombre de usuario no válido");
+        var t = document.createTextNode("El nombre de usuario puede tener 9 caracteres como máximo");
         er.setAttribute('id', 'eNomUsuario')
         er.appendChild(t)
         document.getElementById('nomUsuario').appendChild(er)
@@ -210,7 +210,7 @@ function comprobarContra() {
     if (contraNueva.length < 8) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
-        var t = document.createTextNode("La contraseña no es válida");
+        var t = document.createTextNode("La contraseña debe tener 8 caracteres como mínimo");
         er.setAttribute('id', 'eContraNueva')
         er.appendChild(t)
         document.getElementById("contraNueva").appendChild(er)
@@ -308,12 +308,3 @@ function esCorreo(em) {
     }
 }
 
-function errorDatos() {
-    window.location("registro.php")
-    var er = document.createElement("p")
-    er.setAttribute('class', 'text-danger')
-    var t = document.createTextNode("Ese nombre de usuario ya existe")
-    er.setAttribute('id', 'eNombUs')
-    er.appendChild(t)
-    document.getElementById("c7").appendChild(er)
-}

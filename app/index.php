@@ -20,6 +20,7 @@ $i = 0;
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/second.css'>
+    <link rel="icon" href='img/logo.ico' type ='image/x-icon'>
     <script src='js/bootstrap.bundle.js'></script>
 </head>
 <body>
