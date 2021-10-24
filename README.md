@@ -1,25 +1,39 @@
+# Sistema Web: Call of Data
 
-# Docker LAMP
-Linux + Apache + MariaDB (MySQL) + PHP 7.2 on Docker Compose. Mod_rewrite enabled by default.
+## Integrantes del grupo:
 
-## Instructions
+- Joel Bra Ortiz
+- Bosco Aranguren Sáiz
+- Diego Marta Hurtado
 
-Enter the following command to start your containers:
+## Método de despliegue del proyecto
+
+Situar la terminal dentro de la carpeta SistemaWeb
+
+Descargar docker:
+```bash
+$ apt-get install docker
+```
+
+Crear la imagen web:
+```bash
+$ docker-build -t="web" .
+```
+
+Iniciar los contenedores:
 ```bash
 $ docker-compose up -d
 ```
 
-To stop them, use this:
+Mediante un navegador, acceder a http://localhost:8890/ . 
+
+Iniciar sesión con usuario *admin* y contraseña *test*. 
+
+Hacer click en "database" y luego "import", donde elegiremos el archivo *SistemaWeb/database.sql*.
+
+Acceder a http://localhost:81/ .
+
+En caso de querer detener el proyecto, en otra terminal:
 ```bash
-$ docker-compose stop
+$ docker-compose down
 ```
-
-Feel free to make pull requests and help to improve this.
-
-If you are looking for phpMyAdmin, take a look at [this](https://github.com/celsocelante/docker-lamp/issues/2).
-
-# Web App Design
-This project has been created for the SGSSI subject of the third year of the Computer Science degree at the University of the Basque Country.
-
-## Used Software
-- Bootstrap CSS v5.0 
