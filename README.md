@@ -8,7 +8,7 @@
 
 ## Método de despliegue del proyecto
 
-Situar la terminal dentro de la carpeta SistemaWeb
+Situar la terminal dentro de la carpeta SistemaWeb.
 
 Descargar docker:
 ```bash
@@ -29,7 +29,7 @@ Mediante un navegador, acceder a http://localhost:8890/ .
 
 Iniciar sesión con usuario *admin* y contraseña *test*. 
 
-Hacer click en "database" y luego "import", donde elegiremos el archivo *SistemaWeb/database.sql*.
+Hacer click en *database* y luego *import* o *importar* y finalmente, *Seleccionar archivo*, donde elegiremos el archivo *SistemaWeb/database.sql*.
 
 Acceder a http://localhost:81/ .
 
