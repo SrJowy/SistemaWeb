@@ -89,10 +89,9 @@ INSERT INTO `usuario` (`nombre`, `apellidos`, `dni`, `telefono`, `fecha_nac`, `e
 -- Estructura de tabla para la tabla `sesión`
 --
 
-CREATE TABLE `sesión` (
+CREATE TABLE `sesion` (
   `id` int(11) NOT NULL,
   `nombreUsuario` varchar(15) NOT NULL,
-  `contra` varchar(20) NOT NULL,
   `fechahora` timestamp NOT NULL DEFAULT current_timestamp(),
   `exito` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
