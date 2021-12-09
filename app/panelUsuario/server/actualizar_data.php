@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['actCorreo'])) {
+if (isset($_POST['actCorreo'])) { //Se comprueba que botón se ha pulsado y se ejecuta una función
     actualizarCorreo();
 } elseif (isset($_POST['actNum'])) {
     actualizarTel();
@@ -27,10 +27,10 @@ function actualizarCorreo() {
     $res = mysqli_query($db, $user_check_query);
     $user = mysqli_fetch_assoc($res);
 
-    if ($user) {
+    if ($user) { //Si existe usuario con el correo introducido --> error
         $_SESSION['errorActMail'] = true;
     } else {
-        $query = "UPDATE usuario SET email = '$correo' WHERE nombreUsuario = '$nombreUsuario';";
+        $query = "UPDATE usuario SET email = '$correo' WHERE nombreUsuario = '$nombreUsuario';"; //Actualizamos el correo
         mysqli_query($db, $query);
         $_SESSION['successActMail'] = true;
     }
@@ -61,12 +61,12 @@ function actualizarNombreUsuario() {
     if ($user) {
         $_SESSION['errorActUser'] = true;
     } else {
-        $query = "UPDATE usuario SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';";
+        $query = "UPDATE usuario SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';"; //Actualizamos el usuario
         mysqli_query($db, $query);
-        $query = "UPDATE partida SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';";
+        $query = "UPDATE partida SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';"; //Actualizamos las partidas de ese usuario
         mysqli_query($db, $query);
         $_SESSION['successActUser'] = true;
-        $_SESSION['username'] = $NnombreUsuario;
+        $_SESSION['username'] = $NnombreUsuario; //Cambiamos las variables de sesión
         $_SESSION['success'] = "Hola, $NnombreUsuario";
     }
     header('location: ../cambiarDatos.php');

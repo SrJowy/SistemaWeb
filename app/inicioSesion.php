@@ -30,6 +30,7 @@ session_start();
                 <?php if (isset($_SESSION['errUserContra'])) : ?>
                     <p class="text-danger" id="errUsername">El correo o contraseña no son correctos</p>
                 <?php endif; ?>
+                <input type="hidden" name="CSRFToken" value="OWY4NmQwODE4ODRjN2Q2NTlhMmZlYWEwYzU1YWQwMTVhM2JmNGYxYjJiMGI4MjJjZDE1ZDZMGYwMGEwOA==">
                 <button type="submit" class= " btn btn-primary "> Enviar</button>
             </form>
         <p class="mt-4 mb-0">¿No estás registrado aún? <a href="registro.php">Únete</a></p>

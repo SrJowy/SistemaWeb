@@ -1,4 +1,4 @@
-function comprobardatos() {
+function comprobardatos() { //Permite comprobar si todos los elementos del registro están añadidos y son correctos
     let name = document.getElementById("controlName").value;
     let surname = document.getElementById("controlSurname").value;
     let id = document.getElementById("controlDNI").value;
@@ -9,15 +9,15 @@ function comprobardatos() {
     let username = document.getElementById("controlUsername").value;
     let e = false;
 
-    eliminarHijos();
+    eliminarHijos(); //Se eliminan los mensajes de error para que no se amontonen
     
     if (contieneNumeros(name)) {
-        var er = document.createElement("p")
-        er.setAttribute('class', 'text-danger')
+        var er = document.createElement("p")    //Creamos un elemento p
+        er.setAttribute('class', 'text-danger') //Le damos color rojo al texto
         var t = document.createTextNode("El nombre no puede contener números")
-        er.setAttribute('id', 'erNombre')
-        er.appendChild(t)
-        document.getElementById("c1").appendChild(er)
+        er.setAttribute('id', 'erNombre') //Le damos un id
+        er.appendChild(t) //Le añadimos el texto a p
+        document.getElementById("c1").appendChild(er) //Colocamos debajo del campo correspondiente el mensaje de error
         e= true
     }
     if (contieneNumeros(surname)) {
@@ -89,15 +89,90 @@ function comprobardatos() {
         e= true
     }
 
-    if (!e) document.reg.submit();
+    if (!e) document.reg.submit(); //Si no existe ningún error se hace submit del form
 }
 
-function eliminarHijo(id) {
-    var el = document.getElementById(id)
-    if (el.lastChild.nodeName == 'P') {
-        el.removeChild(el.lastChild)
+function eliminarHijos() {
+    for (var i =1; i< 9; i++) {
+        var c = "c" + i
+        var elem = document.getElementById(c)
+        if (elem.lastChild.nodeName == 'P') {
+            elem.removeChild(elem.lastChild);
+        }
+        
     }
 }
+
+function contieneNumeros(pal) {
+    if (pal.length == 0) {
+        return true;
+    } else {
+        var b = false;
+        var i = 0;
+        while (i < pal.length && !b) {
+            if (!isNaN(pal[i]) && pal[i] != ' ') b = true
+            i++;
+        }
+        return b
+    }
+    
+}
+
+function esCorrecto (id) { //Comprobación del DNI mediante algoritmo
+    if (id.length == 0) {
+        return false;
+    } else {
+        var b = true;
+        var eq = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E']
+        if (id != "") {
+            if (id.length != 9) b = false;
+            else {
+                let nums = parseInt(id.substring(0,8))
+                if (eq[nums % 23] != id.charAt(8)) b = false
+            }
+        }    
+        return b
+    }
+    
+
+}
+
+function esFecha(f) {
+    if (f.length == 0) {
+        return false
+    } else {
+        let fech = Date.now() //Tomamos la fecha de hoy
+        let act = new Date(fech) //Creamos un nuevo objeto Date
+        let fAct = act.toISOString().substring(0,10) //Cambiamos la fecha a ISO y obtenemos los 11 primeros caracteres
+        if (Date.parse(f) >= Date.parse(fAct)) return false //Si la fecha introducida es mayor que la actual return false
+        else return true
+    }
+}
+
+function esTel(t) {
+    var b = true
+    if (t.length != 9) b = false;
+    var i = 0
+    while (i < t.length && b) {
+        if(isNaN(parseInt(t.charAt(i)))) b = false 
+        i++
+    }
+    return b
+}
+
+function esCorreo(em) {
+    if (em.length == 0) {
+        return false
+    } else {
+        re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ //Expresión regular para comprobar que es un correo correcto
+        if (re.exec(em)) 
+            return true;
+        else
+            return false;
+    }
+}
+
+/////////////////////////////////// Funciones individuales para cambiarDatos.php ///////////////////////////////////
 
 function comprobarCorreo() {
     eliminarHijo('correo')
@@ -120,7 +195,7 @@ function comprobarNumero() {
     eliminarHijo('tlf')
     let e = false;
     let num = document.getElementById("actNum").value
-    if(contieneNumeros(num)) {
+    if(num.length != 9) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
         var t = document.createTextNode("Teléfono incorrecto");
@@ -228,83 +303,12 @@ function comprobarContra() {
     if (!e) document.actContraNueva.submit();
 }
 
-function eliminarHijos() {
-    for (var i =1; i< 9; i++) {
-        var c = "c" + i
-        var elem = document.getElementById(c)
-        if (elem.lastChild.nodeName == 'P') {
-            elem.removeChild(elem.lastChild);
-        }
-        
+function eliminarHijo(id) {
+    var el = document.getElementById(id)
+    if (el.lastChild.nodeName == 'P') {
+        el.removeChild(el.lastChild)
     }
 }
 
-function contieneNumeros(pal) {
-    if (pal.length == 0) {
-        return true;
-    } else {
-        var b = false;
-        var i = 0;
-        while (i < pal.length && !b) {
-            if (!isNaN(pal[i]) && pal[i] != ' ') b = true
-            i++;
-        }
-        return b
-    }
-    
-}
 
-function esCorrecto (id) {
-    if (id.length == 0) {
-        return false;
-    } else {
-        var b = true;
-        var eq = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E']
-        if (id != "") {
-            if (id.length != 9) b = false;
-            else {
-                let nums = parseInt(id.substring(0,8))
-                if (eq[nums % 23] != id.charAt(8)) b = false
-            }
-        }    
-        return b
-    }
-    
-
-}
-
-function esFecha(f) {
-    if (f.length == 0) {
-        return false
-    } else {
-        let fech = Date.now()
-        let act = new Date(fech)
-        let fAct = act.toISOString().substring(0,10)
-        if (Date.parse(f) >= Date.parse(fAct)) return false
-        else return true
-    }
-}
-
-function esTel(t) {
-    var b = true
-    if (t.length != 9) b = false;
-    var i = 0
-    while (i < t.length && b) {
-        if(isNaN(parseInt(t.charAt(i)))) b = false 
-        i++
-    }
-    return b
-}
-
-function esCorreo(em) {
-    if (em.length == 0) {
-        return false
-    } else {
-        re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-        if (re.exec(em)) //Expresión regular para comprobar que es un correo correcto
-            return true;
-        else
-            return false;
-    }
-}
 

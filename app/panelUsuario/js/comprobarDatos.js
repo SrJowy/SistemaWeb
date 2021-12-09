@@ -3,7 +3,6 @@ function comprobarDatosIntroducidos() {
     let puntos = document.getElementById("actPuntos").value;
     let bajas = document.getElementById("actBajas").value;
     let muertes = document.getElementById("actMuertes").value;
-    let nomUser = document.getElementById("act")
     let e = false
 
     eliminarHijo("idPartida")
@@ -64,22 +63,19 @@ function eliminarHijo(id) {
     }
 }
 
-function comprobarID(idP) {
+function comprobarID(idP) { 
     e = false
     i = 0
     if (idP.length != 8) {
-        console.log("hola")
         e = true
     } else {
         while (i < 8 && !e){
             if (i >= 4) {
                 if (isNaN(idP[i])) {
-                    console.log("e")
                     e = true
                 }
             } else {
-                if (!idP[i].match(/[A-Z]/i)) {
-                    console.log("e2")
+                if (!idP[i].match(/[A-Z]/i)) { //Expresión regular para saber si es una letra entre A-Z
                     e = true
                 }
             }

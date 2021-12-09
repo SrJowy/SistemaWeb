@@ -263,7 +263,7 @@ if (!isset($_SESSION['username'])) {
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "nomUsuario">
                                     <form name= "actUsername" action="server/actualizar_data.php" method="POST">
-                                        <input name = "actUsername" type="text" class="form-control" id="actUsername" placeholder="ej: AnttonPer3">
+                                        <input name = "actUsername" type="text" class="form-control" id="actUsername" placeholder="ej: AnttonPer">
                                     </form>
                                         <?php if (isset($_SESSION['errorActUser'])) : ?>
                                             <p class= 'text-danger'>El nombre de usuario no está disponible</p>

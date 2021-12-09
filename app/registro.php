@@ -46,7 +46,7 @@ session_start();
                 </div>
                 <div id = "c7" class="mb-3">
                     <label for="usern" class="form-label">Nombre de usuario</label>
-                    <input name= "username" type="text" class="form-control" id="controlUsername" placeholder = "ej: AnttonPer3">
+                    <input name= "username" type="text" class="form-control" id="controlUsername" placeholder = "ej: AnttonPer">
                 </div>
                 <div id = "c8" class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
@@ -58,6 +58,7 @@ session_start();
                 <?php if (isset($_SESSION['errorMail'])) : ?>
                     <p class="text-danger" id="errMail">El correo electrónico ya está registrado</p>
                 <?php endif; ?>
+                <input type="hidden" name="CSRFToken" value="FQMcSH9G3oSuekSUS5q7fo3ZAciGPJGvA2SAHhrmeTNFMGKG3Raop9WAjKHKc4MKwLXx7dY2wiUbNF5eetFf4">
                 <button type="button" class= "btn btn-primary" onclick="comprobardatos()"> Enviar</button>
             </form>
         </div>
