@@ -12,12 +12,18 @@ $usuario = mysqli_fetch_assoc($res);
 if ($usuario) {
     $_SESSION['username'] = $nombre;
     $_SESSION['success'] = "Hola, $nombre";
+    $exito = True;
+    $sesion = "INSERT INTO sesion (nombreUsuario, exito) VALUES ('$nombre', '$exito')";
+    mysqli_query($db, $sesion);
     header('location: ../index.php');
 } else {
     $_SESSION['errUserContra'] = true;
+    $exito = False;
+    $sesion = "INSERT INTO sesion (fechaHora, nombreUsuario, exito) VALUES (now(), '$nombre', '$exito')";
+    mysqli_query($db, $sesion);
     header('location: ../inicioSesion.php');
 }
 
-
+mysqli_close($db);
 
 ?>

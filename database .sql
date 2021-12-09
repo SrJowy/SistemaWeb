@@ -83,6 +83,25 @@ INSERT INTO `usuario` (`nombre`, `apellidos`, `dni`, `telefono`, `fecha_nac`, `e
 -- Índices para tablas volcadas
 --
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sesión`
+--
+
+CREATE TABLE `sesion` (
+  `id` int(11) NOT NULL,
+  `nombreUsuario` varchar(15) NOT NULL,
+  `fechahora` timestamp NOT NULL DEFAULT current_timestamp(),
+  `exito` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tablas volcadas
+--
+
+-- --------------------------------------------------------
+
 --
 -- Indices de la tabla `partida`
 --
@@ -94,6 +113,19 @@ ALTER TABLE `partida`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`nombreUsuario`);
+
+--
+-- Indices de la tabla `sesión`
+--
+ALTER TABLE `sesión`
+  ADD PRIMARY KEY (`id`);
+
+
+--
+-- AUTO_INCREMENT de la tabla `sesión`
+--
+ALTER TABLE `sesión`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
