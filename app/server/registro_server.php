@@ -21,17 +21,15 @@ $nombreUsuario = $_POST['username'];
 $contra = $_POST['contra'];
 $error = false;
 
-<<<<<<< HEAD
 $encryptedPass = encriptar($contra);
-=======
 $contra_split = str_split($contra);
 $mayus = False;
 $minus = False;
 $num = False;
 $extra = False;
 $errorContra = False;
-foreach ($contra_split as &$char) {
-    if (48<=ord($char)<=57){
+/*foreach ($contra_split as &$char) {
+    if (ord($char)<=57){
         $num = True;
     } elseif (65<=ord($char)<=90) {
         $mayus = True; 
@@ -42,8 +40,7 @@ foreach ($contra_split as &$char) {
     } else {
         $errorContra = True;
     }
-}
->>>>>>> 6e48e185b992195f26fe102e249ffec9e5c72fa0
+}*/
 
 if (strlen($contra)<8) {
     //error la contraseña debe tener al menos 8 caracteres
@@ -64,7 +61,6 @@ if (strlen($contra)<8) {
         if ($usuarioNombre) $_SESSION['errorUsername'] = $nombreUsuario;
     }
 
-<<<<<<< HEAD
 if (!$error){
     $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$encryptedPass', '$nombreUsuario');";    
     $res = mysqli_query($db, $query);
@@ -79,7 +75,6 @@ function encriptar($pass) {
     return $encryptedPass;
 }
 
-=======
     if (!$error){
         $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
         $res = mysqli_query($db, $query);
@@ -89,7 +84,6 @@ function encriptar($pass) {
     }
 }
 
->>>>>>> 6e48e185b992195f26fe102e249ffec9e5c72fa0
 ?>
 
 
