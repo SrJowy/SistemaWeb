@@ -14,8 +14,11 @@ $usuario = mysqli_fetch_assoc($res);
 if ($usuario) {
     $_SESSION['username'] = $nombre;
     $_SESSION['success'] = "Hola, $nombre";
+<<<<<<< HEAD
     $_SESSION['start'] = time();
     $_SESSION['expire'] = $_SESSION['start'] + 60;
+=======
+>>>>>>> 6e48e185b992195f26fe102e249ffec9e5c72fa0
     $exito = 1;
     $sesion = "INSERT INTO sesion (nombreUsuario, exito) VALUES ('$nombre', '$exito')";
     mysqli_query($db, $sesion);
