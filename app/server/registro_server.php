@@ -22,49 +22,39 @@ $contra = $_POST['contra'];
 $error = false;
 
 $encryptedPass = encriptar($contra);
-$contra_split = str_split($contra);
-$mayus = False;
-$minus = False;
-$num = False;
-$extra = False;
-$errorContra = False;
-/*foreach ($contra_split as &$char) {
-    if (ord($char)<=57){
-        $num = True;
-    } elseif (65<=ord($char)<=90) {
-        $mayus = True; 
-    } elseif (97<=ord($char)<=122) {
-        $minus = True;
-    } elseif (33<=ord($char)<=47 || 58<=ord($char)<=64 || 91<=ord($char)<=96 || 123<=ord($char)<=126) {
-        $extra = True;
-    } else {
-        $errorContra = True;
-    }
-}*/
 
-if (strlen($contra)<8) {
-    //error la contraseña debe tener al menos 8 caracteres
-} elseif ( !$num || !$mayus || !$minus || !$extra || $errorContra ){
-    //error la contraseña debe de tener al menos un número, una minuscula, una mayúscula y un caracter no alfanúmerico
-} else {
-    $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$nombreUsuario';";
-    $res = mysqli_query($db, $user_check_query);
-    $usuarioNombre = mysqli_fetch_assoc($res);
+$user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = ?;";
+$stmt = $db -> prepare($user_check_query);
+$stmt -> bind_param("s", $nombreUsuario);
+$stmt -> execute();
+$result = $stmt -> get_result();
+$usuarioNombre = $result -> fetch_assoc();
+$stmt-> close();
 
-    $user_check_query = "SELECT * FROM usuario WHERE email = '$email';";
-    $res = mysqli_query($db, $user_check_query);
-    $usuarioMail = mysqli_fetch_assoc($res);
+$user_check_query = "SELECT * FROM usuario WHERE email = ?;";
+$stmt = $db -> prepare($user_check_query);
+$stmt -> bind_param("s", $email);
+$stmt -> execute();
+$result = $stmt -> get_result();
+$usuarioMail = $result -> fetch_assoc();
+$stmt-> close();
 
-    if ($usuarioMail || $usuarioNombre) {
-        $error = true;
-        if ($usuarioMail) $_SESSION['errorMail'] = $email;
-        if ($usuarioNombre) $_SESSION['errorUsername'] = $nombreUsuario;
-    }
+if ($usuarioMail || $usuarioNombre) {
+    $error = true;
+    if ($usuarioMail) $_SESSION['errorMail'] = $email;
+    if ($usuarioNombre) $_SESSION['errorUsername'] = $nombreUsuario;
+}
 
 if (!$error){
-    $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$encryptedPass', '$nombreUsuario');";    
+    $query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,?,?);";
+    $stmt = $db -> prepare($query);
+    $stmt -> bind_param("sssissss", '$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$encryptedPass', '$nombreUsuario');
+    $stmt -> execute();
+    $stmt-> close();
     $res = mysqli_query($db, $query);
     header('location: ../index.php');
+
+    
 } else {    
     header('location: ../registro.php');
 }
@@ -73,15 +63,6 @@ function encriptar($pass) {
     $salt = md5($pass);
     $encryptedPass = crypt($pass,$salt);
     return $encryptedPass;
-}
-
-    if (!$error){
-        $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
-        $res = mysqli_query($db, $query);
-        header('location: ../index.php');
-    } else {    
-        header('location: ../registro.php');
-    }
 }
 
 ?>

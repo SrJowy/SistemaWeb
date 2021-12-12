@@ -52,6 +52,14 @@ session_start();
                     <label for="password" class="form-label">Contraseña</label>
                     <input name = "contra" type="password" class="form-control" id="controlPass">
                 </div>
+                <div id = "c9" class="mb-3">
+                    <label for="password" class="form-label">Repetir contraseña</label>
+                    <input name = "contra_repetir" type="password" class="form-control" id="controlPassRepeat">
+                </div>
+                <div id = "c10" class="mb-3">
+                    <label for="bank_account" class="form-label">Cuenta bancaria</label>
+                    <input name = "cuenta_bancaria" type="text" class="form-control" id="controlBankAccount">
+                </div>
                 <?php if (isset($_SESSION['errorUsername'])) : ?>
                     <p class="text-danger" id="errUsername">El nombre de usuario ya está elegido</p>
                 <?php endif; ?>

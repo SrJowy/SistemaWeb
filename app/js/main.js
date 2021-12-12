@@ -6,6 +6,8 @@ function comprobardatos() { //Permite comprobar si todos los elementos del regis
     let fecha = document.getElementById("controlFecha").value;
     let email = document.getElementById("controlEmail").value;
     let contra = document.getElementById("controlPass").value;
+    let contraRepeat = document.getElementById("controlPassRepeat").value;
+    let bank = document.getElementById("controlBankAccount").value;
     let username = document.getElementById("controlUsername").value;
     let e = false;
 
@@ -88,12 +90,32 @@ function comprobardatos() { //Permite comprobar si todos los elementos del regis
         document.getElementById("c8").appendChild(er)
         e= true
     }
+    
+    if (contra != contraRepeat) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Las contraseñas deben ser iguales")
+        er.setAttribute('id', 'eDiferentes')
+        er.appendChild(t)
+        document.getElementById("c9").appendChild(er)
+        e = true
+    }
+
+    if (!esCuenta(bank)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Debes ingresar una cuenta bancaria real")
+        er.setAttribute('id', 'eBanca')
+        er.appendChild(t)
+        document.getElementById("c10").appendChild(er)
+        e = true
+    }
 
     if (!e) document.reg.submit(); //Si no existe ningún error se hace submit del form
 }
 
 function eliminarHijos() {
-    for (var i =1; i< 9; i++) {
+    for (var i =1; i< 11; i++) {
         var c = "c" + i
         var elem = document.getElementById(c)
         if (elem.lastChild.nodeName == 'P') {
@@ -170,6 +192,15 @@ function esCorreo(em) {
         else
             return false;
     }
+}
+
+function esCuenta(bank) {
+    re = /^(?:(?:IT|SM)\d{2}[A-Z]\d{22}|CY\d{2}[A-Z]\d{23}|NL\d{2}[A-Z]{4}\d{10}|LV\d{2}[A-Z]{4}\d{13}|(?:BG|BH|GB|IE)\d{2}[A-Z]{4}\d{14}|GI\d{2}[A-Z]{4}\d{15}|RO\d{2}[A-Z]{4}\d{16}|KW\d{2}[A-Z]{4}\d{22}|MT\d{2}[A-Z]{4}\d{23}|NO\d{13}|(?:DK|FI|GL|FO)\d{16}|MK\d{17}|(?:AT|EE|KZ|LU|XK)\d{18}|(?:BA|HR|LI|CH|CR)\d{19}|(?:GE|DE|LT|ME|RS)\d{20}|IL\d{21}|(?:AD|CZ|ES|MD|SA)\d{22}|PT\d{23}|(?:BE|IS)\d{24}|(?:FR|MR|MC)\d{25}|(?:AL|DO|LB|PL)\d{26}|(?:AZ|HU)\d{27}|(?:GR|MU)\d{28})$/i;
+    //Expresión regular para comprobar que es un IBAN
+    if (re.exec(bank))
+        return true;
+    else
+        return false;
 }
 
 /////////////////////////////////// Funciones individuales para cambiarDatos.php ///////////////////////////////////

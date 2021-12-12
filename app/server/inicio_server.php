@@ -7,9 +7,13 @@ $contra = $_POST['pass'];
 
 $encryptedPass = encriptar($contra);
 
-$user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$nombre' AND contra = '$encryptedPass';";
-$res = mysqli_query($db, $user_check_query);
-$usuario = mysqli_fetch_assoc($res);
+$user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = ? AND contra = ?;";
+$stmt = $db -> prepare($user_check_query);
+$stmt -> bind_param("ss", $nombre, $encryptedPass);
+$stmt -> execute();
+$result = $stmt -> get_result();
+$usuario = $result -> fetch_assoc();
+$stmt-> close();
 
 if ($usuario) {
     $_SESSION['username'] = $nombre;
@@ -17,14 +21,20 @@ if ($usuario) {
     $_SESSION['start'] = time();
     $_SESSION['expire'] = $_SESSION['start'] + 60;
     $exito = 1;
-    $sesion = "INSERT INTO sesion (nombreUsuario, exito) VALUES ('$nombre', '$exito')";
-    mysqli_query($db, $sesion);
+    $sesion = "INSERT INTO sesion (nombreUsuario, exito) VALUES (?, ?)";
+    $stmt = $db -> prepare($sesion);
+    $stmt -> bind_param("si", $nombre, $exito);
+    $stmt -> execute();
+    $stmt-> close();
     header('location: ../index.php');
 } else {
     $_SESSION['errUserContra'] = true;
     $exito = 0;
-    $sesion = "INSERT INTO sesion (nombreUsuario, exito) VALUES ('$nombre', '$exito')";
-    mysqli_query($db, $sesion);
+    $sesion = "INSERT INTO sesion (nombreUsuario, exito) VALUES (?, ?)";
+    $stmt = $db -> prepare($sesion);
+    $stmt -> bind_param("si", $nombre, $exito);
+    $stmt -> execute();
+    $stmt-> close();
     header('location: ../inicioSesion.php');
 }
 
