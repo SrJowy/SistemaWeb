@@ -21,6 +21,7 @@ $nombreUsuario = $_POST['username'];
 $contra = $_POST['contra'];
 $error = false;
 
+$encryptedPass = encriptar($contra);
 
 $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$nombreUsuario';";
 $res = mysqli_query($db, $user_check_query);
@@ -37,13 +38,18 @@ if ($usuarioMail || $usuarioNombre) {
 }
 
 if (!$error){
-    $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$contra', '$nombreUsuario');";    
+    $query = "INSERT INTO usuario VALUES ('$nombre', '$apellidos', '$dni', '$tel', '$fecha', '$email', '$encryptedPass', '$nombreUsuario');";    
     $res = mysqli_query($db, $query);
     header('location: ../index.php');
 } else {    
     header('location: ../registro.php');
 }
 
+function encriptar($pass) {
+    $salt = md5($pass);
+    $encryptedPass = crypt($pass,$salt);
+    return $encryptedPass;
+}
 
 ?>
 
