@@ -117,14 +117,14 @@ ALTER TABLE `usuario`
 --
 -- Indices de la tabla `sesión`
 --
-ALTER TABLE `sesión`
+ALTER TABLE `sesion`
   ADD PRIMARY KEY (`id`);
 
 
 --
 -- AUTO_INCREMENT de la tabla `sesión`
 --
-ALTER TABLE `sesión`
+ALTER TABLE `sesion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
