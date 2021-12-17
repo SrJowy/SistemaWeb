@@ -1,8 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('location: index.php');
+    header('location: ../index.php');
+} elseif ($_SESSION['ult_actividad'] < time() - $_SESSION['expira']) {
+    session_unset();
+    session_destroy();
 } else {
+    $_SESSION['ult_actividad'] = time(); //SETEAMOS NUEVO TIEMPO DE ACTIVIDAD
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $user = $_SESSION['username'];
     $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$user';";

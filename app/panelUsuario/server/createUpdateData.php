@@ -3,11 +3,11 @@ session_start();
 $username = $_SESSION['username'];
 $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
 $partidaAct = $_SESSION['partidaAct'];
-$numP = $_POST['actIDPartida'];
-$mapa = $_POST['actMapa'];
-$puntos = $_POST['actPuntos'];
-$bajas = $_POST['actBajas'];
-$muertes = $_POST['actMuertes'];
+$numP = htmlspecialchars($_POST['actIDPartida']);
+$mapa = htmlspecialchars($_POST['actMapa']);
+$puntos = htmlspecialchars($_POST['actPuntos']);
+$bajas = htmlspecialchars($_POST['actBajas']);
+$muertes = htmlspecialchars($_POST['actMuertes']);
 
 if ($partidaAct == null) { //Si no existe partida actual --> Creando partida nueva
     $query = "SELECT * FROM partida WHERE nombreUsuario = '$username' AND num_partida = '$numP';";

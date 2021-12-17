@@ -81,10 +81,10 @@ function comprobardatos() { //Permite comprobar si todos los elementos del regis
         e= true
     }
 
-    if (contra.length < 8) {
+    if (esContraSegura(contra)) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
-        var t = document.createTextNode("La contraseña debe tener al menos 8 caracteres")
+        var t = document.createTextNode("La contraseña debe tener al menos 8 caracteres, con mayúsculas, minúsculas, números y caracteres especiales (. ! $)")
         er.setAttribute('id', 'eContra')
         er.appendChild(t)
         document.getElementById("c8").appendChild(er)
@@ -203,6 +203,14 @@ function esCuenta(bank) {
         return false;
 }
 
+function esContraSegura(contra) {
+    re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}[^'\s]/
+    if (re.exec(contra))
+        return true;
+    else
+        return false;
+}
+
 /////////////////////////////////// Funciones individuales para cambiarDatos.php ///////////////////////////////////
 
 function comprobarCorreo() {
@@ -220,6 +228,22 @@ function comprobarCorreo() {
     }
 
     if (!e) document.actCorreo.submit()
+}
+
+function comprobarCuenta() {
+    eliminarHijo('cuenta')
+    let e = false;
+    let cuenta = document.getElementById("actCuenta").value
+    if (!esCuenta(cuenta)) {
+        var er = document.createElement("p")
+        er.setAttribute('class', 'text-danger')
+        var t = document.createTextNode("Número de cuenta no válido");
+        er.setAttribute('id', 'eCuenta')
+        er.appendChild(t)
+        document.getElementById('cuenta').appendChild(er)
+        e= true;
+    }
+    if (!e) document.actCuenta.submit()
 }
 
 function comprobarNumero() {
@@ -313,10 +337,10 @@ function comprobarContra() {
     let e = false
     let contraNueva = document.getElementById("actContraNueva").value
     let contraVieja = document.getElementById("actContraAct").value
-    if (contraNueva.length < 8) {
+    if (!esContraSegura(contraNueva)) {
         var er = document.createElement("p")
         er.setAttribute('class', 'text-danger')
-        var t = document.createTextNode("La contraseña debe tener 8 caracteres como mínimo");
+        var t = document.createTextNode("La contraseña debe tener al menos 8 caracteres, con mayúsculas, minúsculas, números y caracteres especiales (. ! $)");
         er.setAttribute('id', 'eContraNueva')
         er.appendChild(t)
         document.getElementById("contraNueva").appendChild(er)
@@ -331,8 +355,10 @@ function comprobarContra() {
         e = true
     }
 
-    if (!e) document.actContraNueva.submit();
+    if (!e) document.actContra.submit();
 }
+
+
 
 function eliminarHijo(id) {
     var el = document.getElementById(id)

@@ -1,8 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('location: index.php');
+    header('location: ../index.php');
+} elseif ($_SESSION['ult_actividad'] < time() - $_SESSION['expira']) {
+    session_unset();
+    session_destroy();
 } else {
+    $_SESSION['ult_actividad'] = time(); //SETEAMOS NUEVO TIEMPO DE ACTIVIDAD
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $user = $_SESSION['username'];
     $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = '$user';";
@@ -13,13 +17,13 @@ if (!isset($_SESSION['username'])) {
     if (isset($_SESSION['partidaAnt'])) {
         $partida = $_SESSION['partidaAnt'];
     } else {
-        $partida = $_POST['partida'];
+        $partida = htmlspecialchars($_POST['partida']);
     }
     
-    $mapa = $_POST['mapa'];
-    $puntos = $_POST['puntos'];
-    $bajas = $_POST['bajas'];
-    $muertes = $_POST['muertes'];
+    $mapa = htmlspecialchars($_POST['mapa']);
+    $puntos = htmlspecialchars($_POST['puntos']);
+    $bajas = htmlspecialchars($_POST['bajas']);
+    $muertes = htmlspecialchars($_POST['muertes']);
 
     $query = "SELECT SUM(puntos) FROM partida WHERE nombreUsuario = '$user';";
     $res2 = mysqli_query($db,$query);

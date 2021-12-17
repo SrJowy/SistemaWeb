@@ -1,8 +1,13 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('location: index.php');
+    header('location: ../index.php');
+} elseif ($_SESSION['ult_actividad'] < time() - $_SESSION['expira']) {
+    session_unset();
+    session_destroy();
+    header('location: ../index.php');
 } else {
+    $_SESSION['ult_actividad'] = time(); //SETEAMOS NUEVO TIEMPO DE ACTIVIDAD
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $user = $_SESSION['username'];
     $user_check_query = "SELECT *, DATE_FORMAT(fecha_nac, '%d/%m/%Y') AS fech FROM usuario WHERE nombreUsuario = '$user';";
@@ -311,9 +316,8 @@ if (!isset($_SESSION['username'])) {
                                     <p>Contraseña actual: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "contraAct">
-                                    <form name= "actContraAct" action="server/actualizar_data.php" method="POST">
+                                    <form name= "actContra" action="server/actualizar_data.php" method="POST">
                                         <input name = "actContraAct" type="password" class="form-control" id="actContraAct">
-                                    </form>
                                 </div>
                             </div>
                             <div class = "row mb-4">
@@ -321,15 +325,43 @@ if (!isset($_SESSION['username'])) {
                                     <p>Nueva contraseña: </p>
                                 </div>
                                 <div class="col-lg-4 ps-5 text-start" id = "contraNueva">
-                                    <form name= "actContraNueva" action="server/actualizar_data.php" method="POST">
                                         <input name = "actContraNueva" type="password" class="form-control" id="actContraNueva">
                                     </form>
                                         <?php if (isset($_SESSION['successActContra'])) : ?>
                                             <p class= 'text-success'>La contraseña se ha actualizado</p>
+                                        <?php elseif (isset($_SESSION['errorActContra'])) : ?>
+                                            <p class= 'text-danger'>Esa contraseña no es tu contraseña actual</p>
                                         <?php endif ?>
                                 </div>
                                 <div class = "col-lg-4">
                                     <button name = "contraBot" type="button" class= "btn btn-primary" onclick="comprobarContra()"> Actualizar contraseña</button>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-lg-4 text-end">
+                                    <p>Número de cuenta:</p>
+                                </div>
+                                <div class="col-lg-8 ps-5 text-start">
+                                    <?php
+                                    $cuenta = openssl_decrypt($usuario['cuenta'],"AES-128-ECB",$usuario['salt']);
+                                    echo $cuenta;
+                                    ?>
+                                </div>
+                            </div>
+                            <div class = "row mb-4">
+                                <div class="col-lg-4 text-end p-2">
+                                    <p>Nuevo número de cuenta:  </p>
+                                </div>
+                                <div class="col-lg-4 ps-5 text-start" id = "cuenta">
+                                    <form name= "actCuenta" action="server/actualizar_data.php" method="POST">
+                                        <input name = "actCuenta" type="text" class="form-control" id="actCuenta" placeholder="ej: ES7921000813610123456789">
+                                    </form>
+                                        <?php if (isset($_SESSION['successActAccount'])) : ?>
+                                            <p class= 'text-success'>La cuenta se ha actualizado</p>
+                                        <?php endif ?>
+                                </div>
+                                <div class = "col-lg-4">
+                                    <button name = "cuentaBot" type="button" class= "btn btn-primary" onclick="comprobarCuenta()"> Actualizar cuenta</button>
                                 </div>
                             </div>
                         </div>
@@ -396,4 +428,6 @@ unset($_SESSION['successActNombre']);
 unset($_SESSION['successActApellidos']);
 unset($_SESSION['successActDni']);
 unset($_SESSION['successActFecha']);
+unset($_SESSION['successActAccount']);
+unset($_SESSION['errorActContra']);
 ?>

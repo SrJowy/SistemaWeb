@@ -7,6 +7,13 @@ if (!$db) {
     echo "error de depuración: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }
+if ($_SESSION['ult_actividad'] < time() - $_SESSION['expira']) {
+    session_unset();
+    session_destroy();
+} else {
+    $_SESSION['ult_actividad'] = time();
+}
+
 $query = "SELECT nombreUsuario, SUM(puntos) FROM partida GROUP BY nombreUsuario ORDER BY SUM(puntos) DESC LIMIT 3;";  
 $res = mysqli_query($db, $query);
 $i = 0;

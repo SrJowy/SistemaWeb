@@ -2,10 +2,11 @@
 session_start();
 
 $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
-$nombre = $_POST['nombre'];
-$contra = $_POST['pass'];
+$nombre = htmlspecialchars($_POST['nombre']);
+$contra = htmlspecialchars($_POST['pass']);
 
-$encryptedPass = encriptar($contra);
+$salt = md5($contra);
+$encryptedPass = crypt($contra,$salt);
 
 $user_check_query = "SELECT * FROM usuario WHERE nombreUsuario = ? AND contra = ?;";
 $stmt = $db -> prepare($user_check_query);
@@ -18,8 +19,8 @@ $stmt-> close();
 if ($usuario) {
     $_SESSION['username'] = $nombre;
     $_SESSION['success'] = "Hola, $nombre";
-    $_SESSION['start'] = time();
-    $_SESSION['expire'] = $_SESSION['start'] + 60;
+    $_SESSION['expira'] = 60;
+    $_SESSION['ult_actividad'] = time();
     $exito = 1;
     $sesion = "INSERT INTO sesion (nombreUsuario, exito) VALUES (?, ?)";
     $stmt = $db -> prepare($sesion);
@@ -39,11 +40,5 @@ if ($usuario) {
 }
 
 mysqli_close($db);
-
-function encriptar($pass) {
-    $salt = md5($pass);
-    $encryptedPass = crypt($pass,$salt);
-    return $encryptedPass;
-}
 
 ?>
