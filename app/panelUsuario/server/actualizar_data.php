@@ -32,8 +32,11 @@ function actualizarCorreo() {
     if ($user) { //Si existe usuario con el correo introducido --> error
         $_SESSION['errorActMail'] = true;
     } else {
-        $query = "UPDATE usuario SET email = '$correo' WHERE nombreUsuario = '$nombreUsuario';"; //Actualizamos el correo
-        mysqli_query($db, $query);
+        $query = "UPDATE usuario SET email = ? WHERE nombreUsuario = ?;"; //Actualizamos el correo
+        $stmt = $db -> prepare($query);
+        $stmt -> bind_param("ss", $correo, $nombreUsuario);
+        $stmt -> execute();
+        $stmt-> close();
         $_SESSION['successActMail'] = true;
     }
     header('location: ../cambiarDatos.php');
@@ -45,8 +48,11 @@ function actualizarTel() {
     $nombreUsuario = $_SESSION['username'];
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $tel = htmlspecialchars($_POST['actNum']);
-    $query = "UPDATE usuario SET telefono = '$tel' WHERE nombreUsuario = '$nombreUsuario';";
-    mysqli_query($db, $query);
+    $query = "UPDATE usuario SET telefono = ? WHERE nombreUsuario = ?;";
+    $stmt = $db -> prepare($query);
+    $stmt -> bind_param("is", $tel, $nombreUsuario);
+    $stmt -> execute();
+    $stmt-> close();
     $_SESSION['successActNum'] = true;
     header('location: ../cambiarDatos.php');
 }
@@ -63,10 +69,16 @@ function actualizarNombreUsuario() {
     if ($user) {
         $_SESSION['errorActUser'] = true;
     } else {
-        $query = "UPDATE usuario SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';"; //Actualizamos el usuario
-        mysqli_query($db, $query);
-        $query = "UPDATE partida SET nombreUsuario = '$NnombreUsuario' WHERE nombreUsuario = '$nombreUsuario';"; //Actualizamos las partidas de ese usuario
-        mysqli_query($db, $query);
+        $query = "UPDATE usuario SET nombreUsuario = ? WHERE nombreUsuario = ?;"; //Actualizamos el usuario
+        $stmt = $db -> prepare($query);
+        $stmt -> bind_param("ss", $NnombreUsuario, $nombreUsuario);
+        $stmt -> execute();
+        $stmt-> close();
+        $query = "UPDATE partida SET nombreUsuario = ? WHERE nombreUsuario = ?;"; //Actualizamos las partidas de ese usuario
+        $stmt = $db -> prepare($query);
+        $stmt -> bind_param("ss", $NnombreUsuario, $nombreUsuario);
+        $stmt -> execute();
+        $stmt-> close();
         $_SESSION['successActUser'] = true;
         $_SESSION['username'] = $NnombreUsuario; //Cambiamos las variables de sesión
         $_SESSION['success'] = "Hola, $NnombreUsuario";
@@ -90,7 +102,11 @@ function actualizarContra() {
 
     if ($encryptedPass == $usuario['contra']) {
         $newEncryptedPass = crypt($contraN, $salt);
-        $query = "UPDATE usuario SET contra = '$newEncryptedPass' WHERE nombreUsuario = '$nombreUsuario';";
+        $query = "UPDATE usuario SET contra = ? WHERE nombreUsuario = ?;";
+        $stmt = $db -> prepare($query);
+        $stmt -> bind_param("ss", $newEncryptedPass, $nombreUsuario);
+        $stmt -> execute();
+        $stmt-> close();
         mysqli_query($db, $query);
         $_SESSION['successActContra'] = true;
         header('location: ../cambiarDatos.php');
@@ -107,7 +123,11 @@ function actualizarNombre() {
     $nombreUsuario = $_SESSION['username'];
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $nombre = htmlspecialchars($_POST['actNombre']);
-    $query = "UPDATE usuario SET nombre = '$nombre' WHERE nombreUsuario = '$nombreUsuario';";
+    $query = "UPDATE usuario SET nombre = ? WHERE nombreUsuario = ?;";
+    $stmt = $db -> prepare($query);
+    $stmt -> bind_param("ss", $nombre, $nombreUsuario);
+    $stmt -> execute();
+    $stmt-> close();
     mysqli_query($db, $query);
     $_SESSION['successActNombre'] = true;
     header('location: ../cambiarDatos.php');
@@ -119,7 +139,11 @@ function actualizarApellidos() {
     $nombreUsuario = $_SESSION['username'];
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $apellidos = htmlspecialchars($_POST['actApellidos']);
-    $query = "UPDATE usuario SET apellidos = '$apellidos' WHERE nombreUsuario = '$nombreUsuario';";
+    $query = "UPDATE usuario SET apellidos = ? WHERE nombreUsuario = ?;";
+    $stmt = $db -> prepare($query);
+    $stmt -> bind_param("ss", $apellidos, $nombreUsuario);
+    $stmt -> execute();
+    $stmt-> close();
     mysqli_query($db, $query);
     $_SESSION['successActApellidos'] = true;
     header('location: ../cambiarDatos.php');
@@ -131,7 +155,11 @@ function actualizarFecha() {
     $nombreUsuario = $_SESSION['username'];
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $fecha = htmlspecialchars($_POST['actFecha']);
-    $query = "UPDATE usuario SET fecha_nac = '$fecha' WHERE nombreUsuario = '$nombreUsuario';";
+    $query = "UPDATE usuario SET fecha_nac = ? WHERE nombreUsuario = ?;";
+    $stmt = $db -> prepare($query);
+    $stmt -> bind_param("ss", $fecha, $nombreUsuario);
+    $stmt -> execute();
+    $stmt-> close();
     mysqli_query($db, $query);
     $_SESSION['successActFecha'] = true;
     header('location: ../cambiarDatos.php');
@@ -142,7 +170,11 @@ function actualizarDni() {
     $nombreUsuario = $_SESSION['username'];
     $db = mysqli_connect('172.17.0.2:3306', 'admin', 'test', 'database');
     $dni = htmlspecialchars($_POST['actDni']);
-    $query = "UPDATE usuario SET dni = '$dni' WHERE nombreUsuario = '$nombreUsuario';";
+    $query = "UPDATE usuario SET dni = ? WHERE nombreUsuario = ?;";
+    $stmt = $db -> prepare($query);
+    $stmt -> bind_param("ss", $dni, $nombreUsuario);
+    $stmt -> execute();
+    $stmt-> close();
     mysqli_query($db, $query);
     $_SESSION['successActDni'] = true;
     header('location: ../cambiarDatos.php');

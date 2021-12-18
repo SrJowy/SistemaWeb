@@ -23,8 +23,11 @@ if ($partidaAct == null) { //Si no existe partida actual --> Creando partida nue
         $_SESSION['partidaAnt'] = $partidaAct;
         header('location: ../modificar.php');
     } else {
-        $query = "INSERT INTO partida VALUES ('$numP', '$mapa', '$puntos', '$bajas', '$muertes', '$username');"; //Añadimos partida
-        mysqli_query($db,$query);
+        $query = "INSERT INTO partida VALUES (?,?,?,?,?,?);";
+        $stmt = $db -> prepare($query);
+        $stmt -> bind_param("ssiiis", $numP, $mapa, $puntos, $bajas, $muertes, $username);
+        $stmt -> execute();
+        $stmt-> close();
         unset($_SESSION['errorPartidaExiste']);
         header('location: ../partidasGuardadas.php');
     }
@@ -46,9 +49,12 @@ if ($partidaAct == null) { //Si no existe partida actual --> Creando partida nue
             $_SESSION['partidaAnt'] = $partidaAct;
             header('location: ../modificar.php');
         } elseif ($partidaAct == $numP) { //Si se han hecho cambios --> actualizar datos partida
-            $query = "UPDATE partida SET num_partida = '$numP', mapa = '$mapa', puntos='$puntos', bajas = '$bajas', muertes = '$muertes' WHERE nombreUsuario = '$username' AND num_partida = '$partidaAct';";
+            $query = "UPDATE partida SET num_partida = ?, mapa = ?, puntos= ?, bajas = ?, muertes = ? WHERE nombreUsuario = ? AND num_partida = ?;";
+            $stmt = $db -> prepare($query);
+            $stmt -> bind_param("ssiiiss", $numP, $mapa, $puntos, $bajas, $muertes, $username, $partidaAct);
+            $stmt -> execute();
+            $stmt-> close();
             unset($_SESSION['errorPartidaExiste']);
-            mysqli_query($db,$query);
             header('location: ../partidasGuardadas.php');
         } else {
             $_SESSION['errorPartidaExiste'] = true;
@@ -61,9 +67,12 @@ if ($partidaAct == null) { //Si no existe partida actual --> Creando partida nue
             header('location: ../modificar.php');
         }
     } else { //Si la partida no existe --> actualizar partida con datos nuevos (nuevo códido de partida)
-        $query = "UPDATE partida SET num_partida = '$numP', mapa = '$mapa', puntos='$puntos', bajas = '$bajas', muertes = '$muertes' WHERE nombreUsuario = '$username' AND num_partida = '$partidaAct';";
+        $query = "UPDATE partida SET num_partida = ?, mapa = ?, puntos= ?, bajas = ?, muertes = ? WHERE nombreUsuario = ? AND num_partida = ?;";
+        $stmt = $db -> prepare($query);
+        $stmt -> bind_param("ssiiiss", $numP, $mapa, $puntos, $bajas, $muertes, $username, $partidaAct);
+        $stmt -> execute();
+        $stmt-> close();
         unset($_SESSION['errorPartidaExiste']);
-        mysqli_query($db,$query);
         header('location: ../partidasGuardadas.php');
     }
 }
